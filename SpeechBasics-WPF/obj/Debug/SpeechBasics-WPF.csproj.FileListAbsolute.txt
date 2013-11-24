@@ -1,0 +1,12 @@
+C:\Users\Patrick\Documents\Visual Studio 2012\Projects\SpeechBasics-WPF\bin\Debug\SpeechBasics-WPF.exe
+C:\Users\Patrick\Documents\Visual Studio 2012\Projects\SpeechBasics-WPF\bin\Debug\SpeechBasics-WPF.pdb
+C:\Users\Patrick\Documents\Visual Studio 2012\Projects\SpeechBasics-WPF\obj\Debug\SpeechBasics-WPF.csprojResolveAssemblyReference.cache
+C:\Users\Patrick\Documents\Visual Studio 2012\Projects\SpeechBasics-WPF\obj\Debug\MainWindow.baml
+C:\Users\Patrick\Documents\Visual Studio 2012\Projects\SpeechBasics-WPF\obj\Debug\MainWindow.g.cs
+C:\Users\Patrick\Documents\Visual Studio 2012\Projects\SpeechBasics-WPF\obj\Debug\App.g.cs
+C:\Users\Patrick\Documents\Visual Studio 2012\Projects\SpeechBasics-WPF\obj\Debug\SpeechBasics-WPF_MarkupCompile.cache
+C:\Users\Patrick\Documents\Visual Studio 2012\Projects\SpeechBasics-WPF\obj\Debug\SpeechBasics-WPF.g.resources
+C:\Users\Patrick\Documents\Visual Studio 2012\Projects\SpeechBasics-WPF\obj\Debug\Microsoft.Samples.Kinect.SpeechBasics.Properties.Resources.resources
+C:\Users\Patrick\Documents\Visual Studio 2012\Projects\SpeechBasics-WPF\obj\Debug\SpeechBasics-WPF.csproj.GenerateResource.Cache
+C:\Users\Patrick\Documents\Visual Studio 2012\Projects\SpeechBasics-WPF\obj\Debug\SpeechBasics-WPF.exe
+C:\Users\Patrick\Documents\Visual Studio 2012\Projects\SpeechBasics-WPF\obj\Debug\SpeechBasics-WPF.pdb

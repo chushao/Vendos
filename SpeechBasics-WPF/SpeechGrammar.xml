@@ -1,0 +1,174 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<grammar version="1.0" xml:lang="en-US" mode="voice" root="toplevel"
+xmlns="http://www.w3.org/2001/06/grammar" tag-format="semantics/1.0">
+  <rule id="toplevel" scope="public">
+    <one-of>
+      <item> <ruleref uri="#lightsRule"/> <tag> out.Action = rules.lightsRule; </tag> </item>
+      <item> <ruleref uri="#curtainsRule"/> <tag> out.Action = rules.curtainsRule; </tag> </item>
+      <item>
+        <ruleref uri="#percentage" />
+        <item>percent</item>
+      </item>
+    </one-of>
+  </rule>
+
+  <rule id="lightsRule" scope="public">
+    <example>turn lights on</example>
+    <example>turn lights off</example>
+    <example>lights on</example>
+    <example>lights off</example>
+
+    <item repeat="0-1">turn</item>
+    <one-of>
+      <item>lights</item>
+      <item>lamp</item>
+    </one-of>
+    <ruleref uri="#lightsActions"/>
+    <tag> out = 1; </tag>
+  </rule>
+
+  <rule id="lightsActions">
+    <one-of>
+      <item>
+        <one-of>
+          <item>on</item>
+          <item>activate</item>
+        </one-of>
+      </item>
+      <item>
+        <one-of>
+          <item>off</item>
+          <item>deactivate</item>
+        </one-of>
+      </item>
+    </one-of>
+  </rule>
+
+  <rule id="curtainsRule" scope="public">
+    <example>curtains close</example>
+    <example>curtains open</example>
+    <example>curtains open 50 percent</example>
+    <example>curtains open halfway</example>
+
+    <one-of>
+      <item>curtains</item>
+      <item>curtain</item>
+      <item>shades</item>
+    </one-of>
+    <ruleref uri="#curtainsActions"/>
+    <tag> out = 1; </tag>
+  </rule>
+
+  <rule id="curtainsActions" scope="public">
+    <one-of>
+      <item>
+        <one-of>
+          <item>close</item>
+        </one-of>
+      </item>
+      <item>
+        <item>
+          <one-of>
+            <item>open</item>
+          </one-of>
+        </item>
+        <item repeat="0-1">
+          <one-of>
+            <item>halfway</item>
+            <item>
+              <ruleref uri="#percentage"/>
+            </item>
+          </one-of>
+        </item>
+      </item>
+    </one-of>
+  </rule>
+
+  <rule id="percentage">
+    <item>
+      <one-of>
+        <item>
+          zero
+        </item>
+        <item>
+          <ruleref uri="#numberFragment"/>
+        </item>
+        <item>
+          ten
+        </item>
+        <item>
+          eleven
+        </item>
+        <item>
+          twelve
+        </item>
+        <item>
+          <ruleref uri="#numberTeens"/>
+        </item>
+        <item>
+          <item>
+            <ruleref uri="#numberPrefix"/>
+          </item>
+          <item repeat="0-1">
+            <ruleref uri="#numberFragment"/>
+          </item>
+        </item>
+        <item>
+          one hundred
+        </item>
+      </one-of>
+    </item>
+  </rule>
+
+  <rule id="numberTeens">
+    <one-of>
+      <item>
+        thirteen
+      </item>
+      <item>
+        fourteen
+      </item>
+      <item>
+        fifteen
+      </item>
+      <item>
+        sixteen
+      </item>
+      <item>
+        seventeen
+      </item>
+      <item>
+        eighteen
+      </item>
+      <item>
+        nineteen
+      </item>
+    </one-of>
+  </rule>
+  <rule id="numberPrefix">
+    <one-of>
+      <item>twenty</item>
+      <item>thirty</item>
+      <item>fourty</item>
+      <item>fifty</item>
+      <item>sixty</item>
+      <item>seventy</item>
+      <item>eighty</item>
+      <item>ninety</item>
+    </one-of>
+  </rule>
+  <rule id="numberFragment">
+    <one-of>
+      <item>one</item>
+      <item>two</item>
+      <item>three</item>
+      <item>four</item>
+      <item>five</item>
+      <item>six</item>
+      <item>seven</item>
+      <item>eight</item>
+      <item>nine</item>
+    </one-of>
+  </rule>
+
+</grammar>
