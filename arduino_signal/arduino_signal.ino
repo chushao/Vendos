@@ -1,75 +1,75 @@
  
 int IRledPin =  13;    // LED connected to digital pin 13
- 
+
 // The setup() method runs once, when the sketch starts
- 
+
 void setup()   {                
   // initialize the IR digital pin as an output:
   pinMode(IRledPin, OUTPUT);      
- 
+  
   Serial.begin(9600);
 }
- 
+
 void loop()                     
 {
   byte inputCommand;
   
   if (Serial.available()) {
-  Serial.println("Sending IR signal");
-  inputCommand = Serial.read();
-  Serial.println(inputCommand);
-  switch (inputCommand) {
-    case 48:
+    Serial.println("Sending IR signal");
+    inputCommand = Serial.read();
+    Serial.println(inputCommand);
+    switch (inputCommand) {
+      case 48:
       Serial.write('0');
       SendOnCode();
       break;
-    case 49:
+      case 49:
       Serial.write('1');
       SendChannelUpCode();
       break;
-    case 50:
+      case 50:
       Serial.write('2');
       SendChannelDownCode();
       break;
-    case 51:
+      case 51:
       Serial.write('3');
       SendVolUpCode();
       break;
-    case 52:
+      case 52:
       Serial.write('4');
       SendVolDownCode();
       break;
-    case 53:
+      case 53:
       Serial.write('5');
       SendChannel59Code();
       break;
-  }
- 
+    }
+    
  // delay(5000);  // wait twenty seconds (10 seconds * 1000 milliseconds)
-  }
 }
- 
+}
+
 // This procedure sends a 38KHz pulse to the IRledPin 
 // for a certain # of microseconds. We'll use this whenever we need to send codes
 void pulseIR(long microsecs) {
   // we'll count down from the number of microseconds we are told to wait
- 
+  
   cli();  // this turns off any background interrupts
- 
+  
   while (microsecs > 0) {
     // 38 kHz is about 13 microseconds high and 13 microseconds low
    digitalWrite(IRledPin, HIGH);  // this takes about 3 microseconds to happen
    delayMicroseconds(10);         // hang out for 10 microseconds
    digitalWrite(IRledPin, LOW);   // this also takes about 3 microseconds
    delayMicroseconds(10);         // hang out for 10 microseconds
- 
+   
    // so 26 microseconds altogether
    microsecs -= 26;
-  }
+ }
  
   sei();  // this turns them back on
 }
- 
+
 void SendOnCode() {
 
 // Turn On and Off
