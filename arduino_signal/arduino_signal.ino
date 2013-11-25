@@ -44,9 +44,17 @@ void loop()
       SendVolUpCode();
       delay(1);
       SendVolUpCode();
+      delay(1);
+      SendVolUpCode();
+      delay(1);
+      SendVolUpCode();
       break;
       case 122:
       Serial.write('4');
+      SendVolDownCode();
+      delay(1);
+      SendVolDownCode();
+      delay(1);
       SendVolDownCode();
       delay(1);
       SendVolDownCode();
