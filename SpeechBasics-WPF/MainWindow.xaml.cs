@@ -235,7 +235,7 @@ namespace Microsoft.Samples.Kinect.SpeechBasics
         private void SpeechRecognized(object sender, SpeechRecognizedEventArgs e)
         {
             // Speech utterance confidence below which we treat speech as if it hadn't been heard
-            const double ConfidenceThreshold = 0.8;
+            const double ConfidenceThreshold = 0.5;
 
 
             ClearRecognitionHighlights();

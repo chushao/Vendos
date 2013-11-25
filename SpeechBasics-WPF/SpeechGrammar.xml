@@ -5,6 +5,7 @@ xmlns="http://www.w3.org/2001/06/grammar" tag-format="semantics/1.0">
     <one-of>
       <item> <ruleref uri="#lightsRule"/> <tag> out.Action = rules.lightsRule; </tag> </item>
       <item> <ruleref uri="#curtainsRule"/> <tag> out.Action = rules.curtainsRule; </tag> </item>
+      <item> <ruleref uri="#televisionRules"/> </item>
       <item>
         <ruleref uri="#percentage" />
         <item>percent</item>
@@ -50,12 +51,14 @@ xmlns="http://www.w3.org/2001/06/grammar" tag-format="semantics/1.0">
     <example>curtains open 50 percent</example>
     <example>curtains open halfway</example>
 
+    <ruleref uri="#curtainsActions"/>
+    <item>the</item>
     <one-of>
       <item>curtains</item>
       <item>curtain</item>
       <item>shades</item>
     </one-of>
-    <ruleref uri="#curtainsActions"/>
+
     <tag> out = 1; </tag>
   </rule>
 
@@ -72,14 +75,51 @@ xmlns="http://www.w3.org/2001/06/grammar" tag-format="semantics/1.0">
             <item>open</item>
           </one-of>
         </item>
-        <item repeat="0-1">
-          <one-of>
-            <item>halfway</item>
-            <item>
-              <ruleref uri="#percentage"/>
-            </item>
-          </one-of>
-        </item>
+      </item>
+    </one-of>
+  </rule>
+
+  <rule id="televisionRules" scope="public">
+    <item>television</item>
+    <ruleref uri="#televisionActions"/>
+  </rule>
+
+  <rule id="televisionActions">
+    <one-of>
+      <item>
+        <one-of>
+          <item>on</item>
+        </one-of>
+      </item>
+      
+      <item>
+        <one-of>
+          <item>off</item>
+        </one-of>
+      </item>
+      
+      <item>
+        <item>volume up</item>
+      </item>
+
+      <item>
+        <item>volume down</item>
+      </item>
+
+      <item>
+        <item>mute</item>
+      </item>
+
+      <item>
+        <item>unmute</item>
+      </item>
+      
+      <item>
+        <one-of>
+          <item>change channel to</item>
+          <item>tune to</item>
+        </one-of>
+        <item>food network</item>
       </item>
     </one-of>
   </rule>
