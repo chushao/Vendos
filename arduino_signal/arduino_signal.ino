@@ -1,15 +1,19 @@
  
-int IRledPin =  13;    // LED connected to digital pin 13
+#define lightFadePin 6   // Light dimming is connected to pin 6
+#define IRledPin  13    // IR Blaster connected to digital pin 13
 //MotorPinA controls the oven
-int motorPinA1 = 8;    // Blue   - 28BYJ48 pin 1
-int motorPinA2 = 9;    // Pink   - 28BYJ48 pin 2
-int motorPinA3 = 10;    // Yellow - 28BYJ48 pin 3
-int motorPinA4 = 11;    // Orange - 28BYJ48 pin 4
+#define motorPinA1 8    // Blue   - 28BYJ48 pin 1
+#define motorPinA2 9    // Pink   - 28BYJ48 pin 2
+#define motorPinA3 10    // Yellow - 28BYJ48 pin 3
+#define motorPinA4 11    // Orange - 28BYJ48 pin 4
+
 int motorSpeedA = 1200;
 int motorStepRevA = 512; //steps per full rev
 int lookupA[8] = {B01000, B01100, B00100, B00110, B00010, B00011, B00001, B01001};
 //How many steps stepperA has taken. for counting how much degrees to reset
 int stepperA = 0;
+int currentLightBrightness = 70;
+
 // The setup() method runs once, when the sketch starts
 void setup()   {                
   // initialize the IR digital pin as an output:
@@ -18,6 +22,7 @@ void setup()   {
   pinMode(motorPinA2, OUTPUT);
   pinMode(motorPinA3, OUTPUT);
   pinMode(motorPinA4, OUTPUT);
+  pinMode(lightFadePin, OUTPUT);
   Serial.begin(9600);
 }
 
@@ -30,6 +35,46 @@ void loop()
     inputCommand = Serial.read();
     Serial.println(inputCommand);
     switch (inputCommand) {
+      case 97:
+        currentLightBrightness = 0;
+        break;
+        
+      case 98:  
+        currentLightBrightness = 28;
+        break;
+        
+      case 99:
+        currentLightBrightness = 57;
+        break;
+        
+      case 100:
+        currentLightBrightness = 85;
+        break;
+        
+      case 101:
+        currentLightBrightness = 113;
+        break;
+        
+      case 102:
+        currentLightBrightness = 142;
+        break;
+        
+      case 103:
+        currentLightBrightness = 170;
+        break;
+        
+      case 104:
+        currentLightBrightness = 198;
+        break;
+        
+      case 105:
+        currentLightBrightness = 227;
+        break;
+        
+      case 106:
+        currentLightBrightness = 255;
+        break;
+        
       case 67:
         Serial.write('Mute');
         SendMuteCode();
@@ -111,12 +156,13 @@ void loop()
         turnResetCode();
         turnCode(356);
         break;
-
     }
+  }
+  
+  analogWrite(lightFadePin, currentLightBrightness);
+}
 
- // delay(5000);  // wait twenty seconds (10 seconds * 1000 milliseconds)
-}
-}
+
 
 // This procedure sends a 38KHz pulse to the IRledPin 
 // for a certain # of microseconds. We'll use this whenever we need to send codes
