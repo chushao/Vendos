@@ -5,9 +5,12 @@ int motorPinA1 = 8;    // Blue   - 28BYJ48 pin 1
 int motorPinA2 = 9;    // Pink   - 28BYJ48 pin 2
 int motorPinA3 = 10;    // Yellow - 28BYJ48 pin 3
 int motorPinA4 = 11;    // Orange - 28BYJ48 pin 4
-
+int motorSpeedA = 1200;
+int motorStepRevA = 512; //steps per full rev
+int lookupA[8] = {B01000, B01100, B00100, B00110, B00010, B00011, B00001, B01001};
+//How many steps stepperA has taken. for counting how much degrees to reset
+int stepperA = 0;
 // The setup() method runs once, when the sketch starts
-
 void setup()   {                
   // initialize the IR digital pin as an output:
   pinMode(IRledPin, OUTPUT);      
@@ -21,63 +24,93 @@ void setup()   {
 void loop()                     
 {
   byte inputCommand;
-  
+  int stepperA = 0;
   if (Serial.available()) {
-    Serial.println("Sending IR signal");
+    Serial.println("Running Code");
     inputCommand = Serial.read();
     Serial.println(inputCommand);
     switch (inputCommand) {
       case 67:
-      Serial.write('Mute');
-      SendMuteCode();
+        Serial.write('Mute');
+        SendMuteCode();
+        break;
       case 117:
-      Serial.write('0');
-      SendOnCode();
-      break;
+        Serial.write('0');
+        SendOnCode();
+        break;
       case 118:
-      Serial.write('0');
-      SendOnCode();
-      break;
+        Serial.write('0');
+        SendOnCode();
+        break;
       case 119:
-      Serial.write('1');
-      SendChannelUpCode();
-      break;
+        Serial.write('1');
+        SendChannelUpCode();
+        break;
       case 120:
-      Serial.write('2');
-      SendChannelDownCode();
-      break;
+        Serial.write('2');
+        SendChannelDownCode();
+        break;
       case 121:
-      Serial.write('3');
-      SendVolUpCode();
-      delay(300);
-      SendVolUpCode();
-      delay(250);
-      SendVolUpCode();
-      delay(250);
-      SendVolUpCode();
-      delay(250);
-      SendVolUpCode();
-      delay(250);
-      SendVolUpCode();
-      break;
+        Serial.write('3');
+        SendVolUpCode();
+        delay(300);
+        SendVolUpCode();
+        delay(250);
+        SendVolUpCode();
+        delay(250);
+        SendVolUpCode();
+        delay(250);
+        SendVolUpCode();
+        delay(250);
+        SendVolUpCode();
+        break;
       case 122:
-      Serial.write('4');
-      SendVolDownCode();
-      delay(300);
-      SendVolDownCode();
-      delay(250);
-      SendVolDownCode();
-      delay(250);
-      SendVolDownCode();
-      delay(250);
-      SendVolDownCode();
-      delay(250);
-      SendVolDownCode();
-      break;
+        Serial.write('4');
+        SendVolDownCode();
+        delay(300);
+        SendVolDownCode();
+        delay(250);
+        SendVolDownCode();
+        delay(250);
+        SendVolDownCode();
+        delay(250);
+        SendVolDownCode();
+        delay(250);
+        SendVolDownCode();
+        break;
       case 123:
-      Serial.write('5');
-      SendChannel59Code();
-      break;
+        Serial.write('5');
+        SendChannel59Code();
+        break;
+      case 61:
+        //Reset
+        turnResetCode();
+        break;
+      case 62:
+      //> Turn to 350
+        turnResetCode();
+        turnCode(224);
+        break;
+      case 63:
+      //? Turn to 375
+        turnResetCode();
+        turnCode(256);
+        break;
+      case 64:
+      //@ 400
+        turnResetCode();
+        turnCode(292);
+        break;
+      case 65:
+       // A 425
+        turnResetCode();
+        turnCode(324);
+        break;
+      case 66:
+       // B 450
+        turnResetCode();
+        turnCode(356);
+        break;
 
     }
 
@@ -810,5 +843,31 @@ delayMicroseconds(39000);
 pulseIR(8820);
 delayMicroseconds(2160);
 pulseIR(600);
+}
 
+void turnResetCode() {
+  while (stepperA > 0) {
+    for (int i = 0; i < 8; i++) {
+      setOutputA(i);
+      delayMicroseconds(motorSpeedA);
+    }
+  stepperA--;
+  }
+}
+
+void turnCode(int steps) {
+  while (stepperA <= steps) {
+    for (int i = 7; i >= 0; i--) {
+      setOutputA(i);
+      delayMicroseconds(motorSpeedA);
+    }
+  stepperA++;
+  }
+}
+
+void setOutputA(int out) {
+  digitalWrite(motorPinA1, bitRead(lookupA[out], 0));
+  digitalWrite(motorPinA2, bitRead(lookupA[out], 1));
+  digitalWrite(motorPinA3, bitRead(lookupA[out], 2));
+  digitalWrite(motorPinA4, bitRead(lookupA[out], 3));
 }
