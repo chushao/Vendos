@@ -38,29 +38,29 @@ void loop()
       case 121:
       Serial.write('3');
       SendVolUpCode();
-      delay(5);
+      delay(2000);
       SendVolUpCode();
-      delay(3);
+      delay(500);
       SendVolUpCode();
-      delay(3);
+      delay(500);
       SendVolUpCode();
-      delay(3);
+      delay(500);
       SendVolUpCode();
-      delay(3);
+      delay(500);
       SendVolUpCode();
       break;
       case 122:
       Serial.write('4');
       SendVolDownCode();
-      delay(5);
+      delay(2000);
       SendVolDownCode();
-      delay(3);
+      delay(500);
       SendVolDownCode();
-      delay(3);
+      delay(500);
       SendVolDownCode();
-      delay(3);
+      delay(500);
       SendVolDownCode();
-      delay(3);
+      delay(500);
       SendVolDownCode();
       break;
       case 123:
