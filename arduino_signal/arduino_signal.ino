@@ -12,7 +12,7 @@ int motorStepRevA = 512; //steps per full rev
 int lookupA[8] = {B01000, B01100, B00100, B00110, B00010, B00011, B00001, B01001};
 //How many steps stepperA has taken. for counting how much degrees to reset
 int stepperA = 0;
-int currentLightBrightness = 70;
+int currentLightBrightness = 0;
 
 // The setup() method runs once, when the sketch starts
 void setup()   {                
@@ -40,39 +40,39 @@ void loop()
         break;
         
       case 98:  
-        currentLightBrightness = 28;
+        currentLightBrightness = 1;
         break;
         
       case 99:
-        currentLightBrightness = 57;
+        currentLightBrightness = 2;
         break;
         
       case 100:
-        currentLightBrightness = 85;
+        currentLightBrightness = 3;
         break;
         
       case 101:
-        currentLightBrightness = 113;
+        currentLightBrightness = 5;
         break;
         
       case 102:
-        currentLightBrightness = 142;
+        currentLightBrightness = 8;
         break;
         
       case 103:
-        currentLightBrightness = 170;
+        currentLightBrightness = 13;
         break;
         
       case 104:
-        currentLightBrightness = 198;
+        currentLightBrightness = 21;
         break;
         
       case 105:
-        currentLightBrightness = 227;
+        currentLightBrightness = 34;
         break;
         
       case 106:
-        currentLightBrightness = 255;
+        currentLightBrightness = 55;
         break;
         
       case 67:
