@@ -1,12 +1,20 @@
  
 int IRledPin =  13;    // LED connected to digital pin 13
+//MotorPinA controls the oven
+int motorPinA1 = 8;    // Blue   - 28BYJ48 pin 1
+int motorPinA2 = 9;    // Pink   - 28BYJ48 pin 2
+int motorPinA3 = 10;    // Yellow - 28BYJ48 pin 3
+int motorPinA4 = 11;    // Orange - 28BYJ48 pin 4
 
 // The setup() method runs once, when the sketch starts
 
 void setup()   {                
   // initialize the IR digital pin as an output:
   pinMode(IRledPin, OUTPUT);      
-
+  pinMode(motorPinA1, OUTPUT);
+  pinMode(motorPinA2, OUTPUT);
+  pinMode(motorPinA3, OUTPUT);
+  pinMode(motorPinA4, OUTPUT);
   Serial.begin(9600);
 }
 
@@ -19,6 +27,9 @@ void loop()
     inputCommand = Serial.read();
     Serial.println(inputCommand);
     switch (inputCommand) {
+      case 67:
+      Serial.write('Mute');
+      SendMuteCode();
       case 117:
       Serial.write('0');
       SendOnCode();
@@ -38,35 +49,36 @@ void loop()
       case 121:
       Serial.write('3');
       SendVolUpCode();
-      delay(2000);
+      delay(300);
       SendVolUpCode();
-      delay(500);
+      delay(250);
       SendVolUpCode();
-      delay(500);
+      delay(250);
       SendVolUpCode();
-      delay(500);
+      delay(250);
       SendVolUpCode();
-      delay(500);
+      delay(250);
       SendVolUpCode();
       break;
       case 122:
       Serial.write('4');
       SendVolDownCode();
-      delay(2000);
+      delay(300);
       SendVolDownCode();
-      delay(500);
+      delay(250);
       SendVolDownCode();
-      delay(500);
+      delay(250);
       SendVolDownCode();
-      delay(500);
+      delay(250);
       SendVolDownCode();
-      delay(500);
+      delay(250);
       SendVolDownCode();
       break;
       case 123:
       Serial.write('5');
       SendChannel59Code();
       break;
+
     }
 
  // delay(5000);  // wait twenty seconds (10 seconds * 1000 milliseconds)
@@ -723,7 +735,80 @@ delayMicroseconds(28304);
 pulseIR(8840);
 delayMicroseconds(2140);
 pulseIR(640);
+}
 
-
+void SendMuteCode() {
+delayMicroseconds(5284);
+pulseIR(8820);
+delayMicroseconds(4360);
+pulseIR(580);
+delayMicroseconds(520);
+pulseIR(560);
+delayMicroseconds(540);
+pulseIR(580);
+delayMicroseconds(1600);
+pulseIR(580);
+delayMicroseconds(520);
+pulseIR(600);
+delayMicroseconds(480);
+pulseIR(580);
+delayMicroseconds(520);
+pulseIR(580);
+delayMicroseconds(520);
+pulseIR(600);
+delayMicroseconds(480);
+pulseIR(580);
+delayMicroseconds(1620);
+pulseIR(600);
+delayMicroseconds(1600);
+pulseIR(560);
+delayMicroseconds(520);
+pulseIR(600);
+delayMicroseconds(1600);
+pulseIR(560);
+delayMicroseconds(1620);
+pulseIR(580);
+delayMicroseconds(1600);
+pulseIR(600);
+delayMicroseconds(1620);
+pulseIR(580);
+delayMicroseconds(1600);
+pulseIR(580);
+delayMicroseconds(1600);
+pulseIR(620);
+delayMicroseconds(1580);
+pulseIR(600);
+delayMicroseconds(1580);
+pulseIR(600);
+delayMicroseconds(1600);
+pulseIR(600);
+delayMicroseconds(500);
+pulseIR(580);
+delayMicroseconds(520);
+pulseIR(580);
+delayMicroseconds(1600);
+pulseIR(580);
+delayMicroseconds(520);
+pulseIR(580);
+delayMicroseconds(500);
+pulseIR(580);
+delayMicroseconds(520);
+pulseIR(580);
+delayMicroseconds(520);
+pulseIR(560);
+delayMicroseconds(520);
+pulseIR(600);
+delayMicroseconds(1600);
+pulseIR(580);
+delayMicroseconds(1600);
+pulseIR(580);
+delayMicroseconds(520);
+pulseIR(580);
+delayMicroseconds(1600);
+pulseIR(540);
+delayMicroseconds(39000);
+pulseIR(8820);
+delayMicroseconds(2160);
+pulseIR(600);
 
 }
