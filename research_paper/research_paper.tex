@@ -1,0 +1,181 @@
+\documentclass{chi-ext}
+% Please be sure that you have the dependencies (i.e., additional LaTeX packages) to compile this example.
+% See http://personales.upv.es/luileito/chiext/
+
+%% EXAMPLE BEGIN -- HOW TO OVERRIDE THE DEFAULT COPYRIGHT STRIP -- (July 22, 2013 - Paul Baumann)
+% \copyrightinfo{Permission to make digital or hard copies of all or part of this work for personal or classroom use is granted without fee provided that copies are not made or distributed for profit or commercial advantage and that copies bear this notice and the full citation on the first page. Copyrights for components of this work owned by others than ACM must be honored. Abstracting with credit is permitted. To copy otherwise, or republish, to post on servers or to redistribute to lists, requires prior specific permission and/or a fee. Request permissions from permissions@acm.org. \\
+% {\emph{CHI'14}}, April 26--May 1, 2014, Toronto, Canada. \\
+% Copyright \copyright~2014 ACM ISBN/14/04...\$15.00. \\
+% DOI string from ACM form confirmation}
+%% EXAMPLE END -- HOW TO OVERRIDE THE DEFAULT COPYRIGHT STRIP -- (July 22, 2013 - Paul Baumann)
+
+\title{Automated Home At Cost}
+
+\numberofauthors{5}
+% Notice how author names are alternately typesetted to appear ordered in 2-column format;
+% i.e., the first 4 autors on the first column and the other 4 auhors on the second column.
+% Actually, it's up to you to strictly adhere to this author notation.
+\author{
+  \alignauthor{
+  	\textbf{Kirsten Koa}\\
+  	\email{kkoa@ucsd.edu}
+  }\alignauthor{
+  	\textbf{Chu Shao}\\
+  	\email{chsao@eng.ucsd.edu}
+  }
+  \vfil
+  \alignauthor{
+  	\textbf{Derek Huynh}\\
+  	\email{dbhuynh@ucsd.edu}
+  }\alignauthor{
+  	\textbf{Patrick Torbett}\\
+  	\email{ptorbett@ucsd.edu}
+  }
+  \vfil
+  \alignauthor{
+  	\textbf{Calvin Nguyen}\\
+  	\email{cbn004@ucsd.edu}
+  }
+}
+
+% Paper metadata (use plain text, for PDF inclusion and later re-using, if desired)
+\def\plaintitle{Automated Home At Cost}
+\def\plainauthor{Kirsten Koa, Derek Huynh, Calvin Nguyen, Chu Shao, Patrick Torbett}
+\def\plainkeywords{automation, arduino, kinect, voice, gesture}
+\def\plaingeneralterms{Automation}
+
+\hypersetup{
+  % Your metadata go here
+  pdftitle={\plaintitle},
+  pdfauthor={\plainauthor},  
+  pdfkeywords={\plainkeywords},
+  pdfsubject={\plaingeneralterms},
+  % Quick access to color overriding:
+  %citecolor=black,
+  %linkcolor=black,
+  %menucolor=black,
+  %urlcolor=black,
+}
+
+\usepackage{graphicx}   % for EPS use the graphics package instead
+\usepackage{balance}    % useful for balancing the last columns
+\usepackage{bibspacing} % save vertical space in references
+
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+An automated home has the potential to blah blah blah.
+\end{abstract}
+
+\keywords{\plainkeywords}
+\textcolor{red}{Mandatory section to be included in your final version.}
+
+\category{H.5.m}{Information interfaces and presentation (e.g., HCI)}{Miscellaneous}. 
+%See \cite{ACMCCS} 
+See: \url{http://www.acm.org/about/class/1998/} 
+for help using the ACM Classification system.
+\textcolor{red}{Mandatory section to be included in your final version.}
+
+\terms{\plaingeneralterms}
+\textcolor{red}{Optional section to be included in your final version.}
+
+
+% =============================================================================
+\section{Introduction}
+% =============================================================================
+
+Automated homes offer many advantages to ....
+
+% =============================================================================
+\section{Copyright}
+% =============================================================================
+For publications in the CHI Extended Abstracts, copyright remains with the author.  
+The publication is not considered an archival publication; however, it does go into the ACM Digital Library. 
+Because you retain copyright, as the author you are free to use this material as you like, including submitting a paper based on this work to other conferences or journals.  
+Authors grant unrestricted permission for ACM to publish the accepted submission in the CHI Extended Abstracts without additional consideration or remuneration.
+
+% =============================================================================
+\section{Motivation and Related Work}
+% =============================================================================
+Please use an 8.5-point Verdana font, or other sans serifs font as close as possible in appearance to Verdana in which these guidelines have been set. 
+Arial 9-point font is a reasonable substitute for Verdana as it has a similar x-height. 
+Please use serif or non-proportional fonts only for special purposes, such as distinguishing source code text.
+Additionally, here is an example of footnoted text.\footnote{Use footnotes sparingly, if at all.}
+As stated in the footnote, footnotes should rarely be used.
+
+\subsection{Language, style, and content}
+% -----------------------------------------------------------------------------
+The written and spoken language of SIGCHI is English. 
+Spelling and punctuation may use any dialect of English (e.g., British, Canadian, US, etc.) provided this is done consistently. 
+Hyphenation is optional. 
+To ensure suitability for an international audience, please pay attention to the following:
+
+\begin{itemize}\compresslist
+\item 	
+Write in a straightforward style. 
+Use simple sentence structure. 
+Try to avoid long sentences and complex sentence structures. 
+Use semicolons carefully.
+\item 	
+Use common and basic vocabulary (e.g., use the word ``unusual" rather than the word ``arcane").
+\item 	
+Briefly define or explain all technical terms. 
+The terminology common to your practice/discipline may be different in other design practices/disciplines.
+\item 	
+Spell out all acronyms the first time they are used in your text. 
+For example, ``World Wide Web (WWW)".
+\item 	
+Explain local references (e.g., not everyone knows all city names in a particular country).
+\item 	
+Explain ``insider" comments. 
+Ensure that your whole audience understands any reference whose meaning you do not describe (e.g., do not assume that everyone has used a Macintosh or a particular application).
+\item 	
+Explain colloquial language and puns. 
+Understanding phrases like ``red herring" requires a cultural knowledge of English. 
+Humor and irony are difficult to translate.
+\item 	
+Use unambiguous forms for culturally localized concepts, such as times, dates, currencies and numbers (e.g., ``1-5-97" or ``5/1/97" may mean 5 January or 1 May, and ``seven o'clock" may mean 7:00 am or 19:00).
+\item 	
+Be careful with the use of gender-specific pronouns (he, she) and other gender-specific words (chairman, manpower, man-months). 
+Use inclusive language (e.g., she or he, they, chair, staff, staff-hours, person-years) that is gender-neutral. 
+If necessary, you may be able to use ``he" and ``she" in alternating sentences, so that the two genders occur equally often~\cite{Schwartz95}. 
+\end{itemize}
+
+
+% =============================================================================
+\section{Solution (Vendos)}
+% =============================================================================
+
+Our solution, Vendos, blah blah blah
+
+% =============================================================================
+\section{Evaluation}
+% =============================================================================
+
+We have evaluated our solution
+
+% =============================================================================
+\section{Discussion}
+% =============================================================================
+
+The future of consumer hardware, such as the Kinect 2, blah blah blah
+
+% =============================================================================
+\section{Conclusion}
+% =============================================================================
+
+Our solution blah blah blah
+
+
+\section{Acknowledgements}
+
+We thank blah blah blah for blah blah blah
+
+\balance
+\bibliographystyle{acm-sigchi}
+\bibliography{research_paper}
+
+\end{document}
