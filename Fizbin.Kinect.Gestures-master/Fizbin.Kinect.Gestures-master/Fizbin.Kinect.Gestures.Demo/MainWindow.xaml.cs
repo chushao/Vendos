@@ -305,9 +305,8 @@ namespace Fizbin.Kinect.Gestures.Demo
         private void OnRaiseTheRoof()
         {
             System.Media.SoundPlayer player = new System.Media.SoundPlayer(@"C:\Users\Derek\Documents\GitHub\cse-118-yolo-secret-ninja\Fizbin.Kinect.Gestures-master\Fizbin.Kinect.Gestures-master\Fizbin.Kinect.Gestures.Demo\Pikachu.wav");
-            
             player.Play();
-            CallSomeone();
+            CallSomeone("It's PARTY TIME!!!");
         }
 
         private void SleepTime()
@@ -315,27 +314,25 @@ namespace Fizbin.Kinect.Gestures.Demo
             Console.WriteLine("Sleep Time enabled");
             if (ARDUINO_IN)
             {
-                SendCommandToArduino(97);
-                SendCommandToArduino(107);
+                light = LIGHT_OFF;
+                SendCommandToArduino(LIGHT_OFF);
+                SendCommandToArduino(CURTAIN_OFF);
                 if (tvIsOn)
                 {
                     SendCommandToArduino(TV_OFF);
                     tvIsOn = false;
                 }
-                SendCommandToArduino(APPLIANCE_OFF);
-                light = 97;
-                SendCommandToArduino(97);               
+                SendCommandToArduino(APPLIANCE_OFF);   
             }
-
         }
 
 
-        private void CallSomeone()
+        private void CallSomeone(string msg)
         {
             Voice v = new Voice("koaswift@gmail.com", "cse118team8");
             v.Call("+19255481182", "koaswift@gmail.com");               // Call from Google Voice Account -> Gmail account (Must have window open)
-            v.SendSMS("+19255481182", "Help I have fallen, and I cannot get up!\n\n # Test of Kinect Project - Kirsten's Phone");
-            v.SendSMS("+17027684490", "Help I have fallen, and I cannot get up!\n\n # Test of Kinect Project - Derek's Phone");
+            // v.SendSMS("+19255481182", msg + " - Kirsten's Phone");
+            v.SendSMS("+17027684490", msg + " - Derek's Phone");
 
         }
 
@@ -734,8 +731,7 @@ namespace Fizbin.Kinect.Gestures.Demo
 
             if (e.Result.Confidence >= ConfidenceThreshold)
             {
-                Console.WriteLine("hello");
-                Console.WriteLine(e.Result.Text.ToString());
+                //Console.WriteLine(e.Result.Text.ToString());
                 Console.WriteLine(e.Result.Semantics.Value.ToString());
                 MODE = e.Result.Semantics.Value.ToString();
                 //switch (e.Result.Semantics.Value.ToString())

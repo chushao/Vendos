@@ -109,6 +109,7 @@
       <item>curtain</item>
       <item>shades</item>
     </one-of>
+    <ruleref uri="#curtainsActions"/>
   </rule>
 
   <rule id="curtainsActions">
