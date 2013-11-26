@@ -1,19 +1,64 @@
-﻿<?xml version="1.0" encoding="UTF-8" ?>
-<grammar version="1.0" xml:lang="en-US" mode="voice" root="toplevel"
-xmlns="http://www.w3.org/2001/06/grammar" tag-format="semantics/1.0">
-  <rule id="toplevel" scope="public">
+﻿<grammar version="1.0" xml:lang="en-US" root="toplevel" tag-format="semantics/1.0" xmlns="http://www.w3.org/2001/06/grammar">
+  <rule id="toplevel">
     <one-of>
-      <item> <ruleref uri="#lightsRule"/> <tag> out.Action = rules.lightsRule; </tag> </item>
-      <item> <ruleref uri="#curtainsRule"/> <tag> out.Action = rules.curtainsRule; </tag> </item>
+      <item> <ruleref uri="#lightsRule"/> </item>
+      <item> <ruleref uri="#curtainsRule"/> </item>
       <item> <ruleref uri="#televisionRules"/> </item>
+      <item> <ruleref uri="#modeSwapRules" /> </item>
+      <!--
       <item>
         <ruleref uri="#percentage" />
         <item>percent</item>
       </item>
+      -->
     </one-of>
   </rule>
 
-  <rule id="lightsRule" scope="public">
+  <rule id="modeSwapRules">
+    <one-of>
+      <item>
+        <tag>out="TELEVISION MODE";</tag>
+        television mode
+      </item>
+      <item>
+        <tag>out="GENERAL MODE";</tag>
+        general mode
+      </item>
+      <item>
+        <tag>out="LIGHTS MODE";</tag>
+        lights mode
+      </item>
+      <item>
+        <tag>out="APPLIANCE MODE";</tag>
+        appliance mode
+      </item>
+    </one-of>
+    <!--
+    <item>change</item>
+    <item>mode</item>
+    <item>to</item>
+    <one-of>
+      <item>
+        <tag>out="MODE GENERAL";</tag>
+        general
+      </item>
+      <item>
+        <tag>out="MODE TELEVISION";</tag>
+        television
+      </item>
+      <item>
+        <tag>out="MODE LIGHTS";</tag>
+        lights
+      </item>
+      <item>
+        <tag>out="MODE APPLIANCE"</tag>
+        appliance
+      </item>
+    </one-of>
+    -->
+  </rule>
+
+  <rule id="lightsRule">
     <example>turn lights on</example>
     <example>turn lights off</example>
     <example>lights on</example>
@@ -25,18 +70,19 @@ xmlns="http://www.w3.org/2001/06/grammar" tag-format="semantics/1.0">
       <item>lamp</item>
     </one-of>
     <ruleref uri="#lightsActions"/>
-    <tag> out = 1; </tag>
   </rule>
 
   <rule id="lightsActions">
     <one-of>
       <item>
+        <tag>out="LIGHTS ON";</tag>
         <one-of>
           <item>on</item>
           <item>activate</item>
         </one-of>
       </item>
       <item>
+        <tag>out="LIGHTS OFF";</tag>
         <one-of>
           <item>off</item>
           <item>deactivate</item>
@@ -45,7 +91,7 @@ xmlns="http://www.w3.org/2001/06/grammar" tag-format="semantics/1.0">
     </one-of>
   </rule>
 
-  <rule id="curtainsRule" scope="public">
+  <rule id="curtainsRule">
     <example>curtains close</example>
     <example>curtains open</example>
     <example>curtains open 50 percent</example>
@@ -53,73 +99,107 @@ xmlns="http://www.w3.org/2001/06/grammar" tag-format="semantics/1.0">
 
     <ruleref uri="#curtainsActions"/>
     <item>the</item>
+    <ruleref uri="#curtainsSynonyms"/>
+    <tag>out=rules.curtainsActions;</tag>
+  </rule>
+
+  <rule id="curtainsSynonyms">
     <one-of>
       <item>curtains</item>
       <item>curtain</item>
       <item>shades</item>
     </one-of>
-
-    <tag> out = 1; </tag>
   </rule>
 
-  <rule id="curtainsActions" scope="public">
+  <rule id="curtainsActions">
     <one-of>
       <item>
+        <tag>out="CURTAINS CLOSE";</tag>
         <one-of>
           <item>close</item>
         </one-of>
       </item>
       <item>
-        <item>
-          <one-of>
-            <item>open</item>
-          </one-of>
-        </item>
+        <tag>out="CURTAINS OPEN";</tag>
+        <one-of>
+          <item>open</item>
+        </one-of>
       </item>
     </one-of>
   </rule>
 
-  <rule id="televisionRules" scope="public">
-    <item>television</item>
+  <rule id="televisionRules">
+    <one-of>
+      <item>television</item>
+      <item>tv</item>
+    </one-of>
     <ruleref uri="#televisionActions"/>
   </rule>
 
   <rule id="televisionActions">
     <one-of>
       <item>
+        <tag>out="TELEVISION ON";</tag>
         <one-of>
           <item>on</item>
         </one-of>
       </item>
       
       <item>
+        <tag>out="TELEVISION OFF";</tag>
         <one-of>
           <item>off</item>
         </one-of>
       </item>
+
+      <item>
+        <tag>out="TELEVISION CHANNEL UP";</tag>
+        <one-of>
+          <item>channel up</item>
+        </one-of>
+      </item>
+
+      <item>
+        <tag>out="TELEVISION CHANNEL DOWN";</tag>
+        <one-of>
+          <item>channel down</item>
+        </one-of>
+      </item>
       
       <item>
+        <tag>out="TELEVISION VOLUME UP";</tag>
         <item>volume up</item>
       </item>
 
       <item>
+        <tag>out="TELEVISION VOLUME DOWN";</tag>
         <item>volume down</item>
       </item>
 
       <item>
-        <item>mute</item>
+        <tag>out="TELEVISION MUTE";</tag>
+        <one-of>
+          <item>mute</item>
+          <item>unmute</item>
+        </one-of>
       </item>
 
-      <item>
-        <item>unmute</item>
-      </item>
-      
       <item>
         <one-of>
           <item>change channel to</item>
           <item>tune to</item>
         </one-of>
-        <item>food network</item>
+        <ruleref uri="#channels"/>
+        <tag>out="TELEVISION CHANNEL " + rules.channels.Channel;</tag>
+      </item>
+    </one-of>
+  </rule>
+
+  <rule id="channels">
+    <one-of>
+      <item>
+        <tag>out.Channel="FOOD NETWORK";</tag>
+        food network
       </item>
     </one-of>
   </rule>

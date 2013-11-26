@@ -235,7 +235,7 @@ namespace Microsoft.Samples.Kinect.SpeechBasics
         private void SpeechRecognized(object sender, SpeechRecognizedEventArgs e)
         {
             // Speech utterance confidence below which we treat speech as if it hadn't been heard
-            const double ConfidenceThreshold = 0.5;
+            const double ConfidenceThreshold = 0.8;
 
 
             ClearRecognitionHighlights();
@@ -243,6 +243,7 @@ namespace Microsoft.Samples.Kinect.SpeechBasics
             if (e.Result.Confidence >= ConfidenceThreshold)
             {
                 Console.WriteLine(e.Result.Text.ToString());
+                Console.WriteLine(e.Result.Semantics.Value.ToString());
                 //switch (e.Result.Semantics.Value.ToString())
                 //{
 
