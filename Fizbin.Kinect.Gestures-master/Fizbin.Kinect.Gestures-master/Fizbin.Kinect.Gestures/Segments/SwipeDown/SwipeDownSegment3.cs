@@ -1,4 +1,5 @@
 ﻿using Microsoft.Kinect;
+using System;
 
 namespace Fizbin.Kinect.Gestures.Segments
 {
@@ -15,18 +16,27 @@ namespace Fizbin.Kinect.Gestures.Segments
         public GesturePartResult CheckGesture(Skeleton skeleton)
         {
             // //Right hand in front of right Shoulder
-            if (skeleton.Joints[JointType.HandRight].Position.Z < skeleton.Joints[JointType.ElbowRight].Position.Z && skeleton.Joints[JointType.HandRight].Position.Y < skeleton.Joints[JointType.ShoulderCenter].Position.Y)
+            if (/*skeleton.Joints[JointType.HandRight].Position.Z < skeleton.Joints[JointType.ElbowRight].Position.Z &&*/ skeleton.Joints[JointType.HandRight].Position.Y < skeleton.Joints[JointType.ShoulderCenter].Position.Y)
             {
+                //Console.WriteLine("Swipe Down 3 - 1");
+
                 // right hand below hip
                 if (skeleton.Joints[JointType.HandRight].Position.Y < skeleton.Joints[JointType.HipRight].Position.Y)
                 {
-                    // right hand right of right shoulder
-                    if (skeleton.Joints[JointType.HandRight].Position.X > skeleton.Joints[JointType.HipRight].Position.X)
+                    //Console.WriteLine("Swipe Down 3 - 2");
+
+                    // right hand right of center hip
+                    if (skeleton.Joints[JointType.HandRight].Position.X > skeleton.Joints[JointType.HipCenter].Position.X)
                     {
+                       //Console.WriteLine("Swipe Down 3 - Success");
+
                         return GesturePartResult.Succeed;
                     }
+                    //Console.WriteLine("Swipe Down 3 - Pausing");
+
                     return GesturePartResult.Pausing;
                 }
+                //Console.WriteLine("Swipe Down 3 - Fail");
 
                 // Debug.WriteLine("GesturePart 2 - right hand below shoulder height but above hip height - FAIL");
                 return GesturePartResult.Fail;

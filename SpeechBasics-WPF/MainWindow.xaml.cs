@@ -167,6 +167,8 @@ namespace Microsoft.Samples.Kinect.SpeechBasics
                 * var g = new Grammar(gb);
                 * 
                 ****************************************************************/
+                string str = Properties.Resources.SpeechGrammar;
+                Console.Write("speech grammar " + str);
 
                 // Create a grammar from grammar definition XML file.
                 using (var memoryStream = new MemoryStream(Encoding.ASCII.GetBytes(Properties.Resources.SpeechGrammar)))

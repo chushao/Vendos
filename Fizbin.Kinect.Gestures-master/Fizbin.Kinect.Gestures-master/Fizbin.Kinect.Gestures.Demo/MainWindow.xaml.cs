@@ -1,22 +1,26 @@
-﻿using System.Windows;
-using System.Windows.Data;
+﻿using Fizbin.Kinect.Gestures.Segments;
 using Microsoft.Kinect;
 using Microsoft.Kinect.Toolkit;
 using Microsoft.Samples.Kinect.WpfViewers;
-using System.ComponentModel;
-using System;
-using System.Timers;
-using Fizbin.Kinect.Gestures.Segments;
+using Microsoft.Speech.AudioFormat;
+using Microsoft.Speech.Recognition;
 using Newtonsoft.Json;
 using SharpVoice;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.IO;
 using System.IO.Ports;
-
-
+using System.Text;
+using System.Timers;
+using System.Windows;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Media;
 
 
 namespace Fizbin.Kinect.Gestures.Demo
 {
-
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
@@ -26,20 +30,37 @@ namespace Fizbin.Kinect.Gestures.Demo
 
         private Skeleton[] skeletons = new Skeleton[0];
 
-        private int LIGHT = 97;           // [97 - 106]
-        private int CURTAIN = 107;        // [107 - 116]
+        private bool ARDUINO_IN = false;             // flag to enable SendCommandToArduino
+
+        // CONSTANTS
         private const int TV_ON = 118;
         private const int TV_OFF = 117;
         private const int CHANNEL_UP = 119;
         private const int CHANNEL_DOWN = 120;
         private const int VOLUME_UP = 121;
         private const int VOLUME_DOWN = 122;
-        private const int APPLIANCE_OFF = 65;
+        private const int APPLIANCE_OFF = 61;
         private const int APPLIANCE_ON = 66;
+        private const int LIGHT_OFF = 97;
+        private const int LIGHT_ON = 106;
+        private const int CURTAIN_OFF = 107;
+        private const int CURTAIN_ON = 116;
+
+        // Variable intensity values
+        private int light = LIGHT_OFF;              // [97 - 106]
+        private int curtain = CURTAIN_OFF;          // [107 - 116]
+        private int appliance = APPLIANCE_OFF;      // [61 - 66]
 
         // Flags to check for device status
-        private bool tv_on = false;
-        private bool appliance_on = false;
+        private bool tvIsOn = false;
+
+        // Current Appliance Control Mode
+        private const string LIGHT_MODE = "LIGHTS MODE";
+        private const string GENERAL_MODE = "GENERAL MODE";
+        private const string TV_MODE = "TELEVISION MODE";
+        private const string APPLIANCE_MODE = "APPLIANCE MODE";
+        private string MODE = LIGHT_MODE;
+
         
         Timer _clearTimer;
         SerialPort serialPort;
@@ -71,7 +92,7 @@ namespace Fizbin.Kinect.Gestures.Demo
             _clearTimer.Elapsed += new ElapsedEventHandler(clearTimer_Elapsed);
 
             // add SerialPort for sending messages to Arduino
-            serialPort = new SerialPort("COM1", 9600);
+            serialPort = new SerialPort("COM4", 9600);
         }
 
         #region Kinect Discovery & Setup
@@ -283,11 +304,31 @@ namespace Fizbin.Kinect.Gestures.Demo
 
         private void OnRaiseTheRoof()
         {
-            System.Media.SoundPlayer player = new System.Media.SoundPlayer(@"C:\Users\Derek\Desktop\Fizbin.Kinect.Gestures-master\Fizbin.Kinect.Gestures-master\Fizbin.Kinect.Gestures.Demo\Pikachu.wav");
+            System.Media.SoundPlayer player = new System.Media.SoundPlayer(@"C:\Users\Derek\Documents\GitHub\cse-118-yolo-secret-ninja\Fizbin.Kinect.Gestures-master\Fizbin.Kinect.Gestures-master\Fizbin.Kinect.Gestures.Demo\Pikachu.wav");
             
             player.Play();
             CallSomeone();
         }
+
+        private void SleepTime()
+        {
+            Console.WriteLine("Sleep Time enabled");
+            if (ARDUINO_IN)
+            {
+                SendCommandToArduino(97);
+                SendCommandToArduino(107);
+                if (tvIsOn)
+                {
+                    SendCommandToArduino(TV_OFF);
+                    tvIsOn = false;
+                }
+                SendCommandToArduino(APPLIANCE_OFF);
+                light = 97;
+                SendCommandToArduino(97);               
+            }
+
+        }
+
 
         private void CallSomeone()
         {
@@ -300,6 +341,8 @@ namespace Fizbin.Kinect.Gestures.Demo
 
         private void SendCommandToArduino(int msg)
         {
+            if (!serialPort.IsOpen)
+            serialPort.Open();
             serialPort.Write(""+(char)msg);   
         }
 
@@ -308,6 +351,8 @@ namespace Fizbin.Kinect.Gestures.Demo
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e">Gesture event arguments.</param>
+
+
         private void OnGestureRecognized(object sender, GestureEventArgs e)
         {
             switch (e.GestureName)
@@ -327,54 +372,101 @@ namespace Fizbin.Kinect.Gestures.Demo
                     break;
                 case "JoinedHands":
                     Gesture = "Joined Hands";
+                    this.SleepTime();
                     break;
                 case "SwipeLeft":
                     Gesture = "Swipe Left";
-                    if (tv_on)
+                    if (tvIsOn && MODE.Equals(TV_MODE))
                     {
-                        this.SendCommandToArduino(VOLUME_UP);
+                        Console.WriteLine("VOLUME UP");
+                        if (ARDUINO_IN) this.SendCommandToArduino(VOLUME_UP);
+                    }
+                    else if (MODE.Equals(LIGHT_MODE))
+                    {
+                        Console.WriteLine("LIGHT INCREASE");
+                        if (light < LIGHT_ON) light += 1;
+                        if (ARDUINO_IN) this.SendCommandToArduino(light);
                     }
                     break;
                 case "SwipeRight":
                     Gesture = "Swipe Right";
-                    if (tv_on)
+                    if (tvIsOn && MODE.Equals(TV_MODE))
                     {
-                        this.SendCommandToArduino(VOLUME_DOWN);
+                        Console.WriteLine("VOLUME DOWN");
+                        if (ARDUINO_IN) this.SendCommandToArduino(VOLUME_DOWN);
                     }
- 					break;
+                    else if (MODE.Equals(LIGHT_MODE))
+                    {
+                        Console.WriteLine("LIGHT DECREASE");
+                        if (light > LIGHT_OFF) light -= 1;
+                        if (ARDUINO_IN) this.SendCommandToArduino(light);
+                    }
+                    break;
                 case "SwipeUp":
                     Gesture = "Swipe Up";
-                    if (tv_on)
+                    if (tvIsOn && MODE.Equals(TV_MODE))
                     {
-                        this.SendCommandToArduino(CHANNEL_DOWN);
+                        Console.WriteLine("CHANNEL UP");
+                        if (ARDUINO_IN) this.SendCommandToArduino(CHANNEL_UP);
+                    }
+                    else if (MODE.Equals(APPLIANCE_MODE))
+                    {
+                        Console.WriteLine("APPLIANCE UP");
+                        if (appliance < APPLIANCE_ON) appliance += 1;
+                        if (ARDUINO_IN) this.SendCommandToArduino(appliance);
                     }
                     break;
                 case "SwipeDown":
                     Gesture = "Swipe Down";
-                    if (tv_on)
+                    if (tvIsOn && MODE.Equals(TV_MODE))
                     {
-                        this.SendCommandToArduino(CHANNEL_UP);
+                        Console.WriteLine("CHANNEL DOWN");
+                        if (ARDUINO_IN) this.SendCommandToArduino(CHANNEL_DOWN);
+                    }
+                    else if (MODE.Equals(APPLIANCE_MODE))
+                    {
+                        Console.WriteLine("APPLIANCE DOWN");
+                        if (appliance > APPLIANCE_OFF) appliance -= 1;
+                        if (ARDUINO_IN) this.SendCommandToArduino(appliance);
                     }
                     break;
                 case "ZoomIn":
                     Gesture = "Zoom In";
-                    if (!tv_on)
+                    if (!tvIsOn && MODE.Equals(TV_MODE))
                     {
-                        this.SendCommandToArduino(TV_ON);
+                        Console.WriteLine("TV ON");
+                        if (ARDUINO_IN) this.SendCommandToArduino(TV_ON);
+                        tvIsOn = true;
+                    }
+                    else if (MODE.Equals(LIGHT_MODE))
+                    {
+                        Console.WriteLine("LIGHT ON");
+                        if (ARDUINO_IN) this.SendCommandToArduino(LIGHT_ON);
+                        light = LIGHT_ON;
                     }
                     break;
                 case "ZoomOut":
                     Gesture = "Zoom Out";
-                    if (tv_on)
+                    if (tvIsOn && MODE.Equals(TV_MODE))
                     {
-                        this.SendCommandToArduino(TV_OFF);
+                        Console.WriteLine("TV OFF");
+                        if (ARDUINO_IN) this.SendCommandToArduino(TV_OFF);
+                        tvIsOn = false;
+                    }
+                    else if (MODE.Equals(LIGHT_MODE))
+                    {
+                        Console.WriteLine("LIGHT ON");
+                        if (ARDUINO_IN) this.SendCommandToArduino(LIGHT_OFF);
+                        light = LIGHT_OFF;
                     }
                     break;
                 default:
+                    Gesture = "None detected";
                     break;
             }
 
-            Console.WriteLine("HALLO " + Gesture);
+            //Console.WriteLine("HALLO " + Gesture);
+            Console.WriteLine(MODE);
             _clearTimer.Start();
         }
 
@@ -385,7 +477,7 @@ namespace Fizbin.Kinect.Gestures.Demo
         /// <param name="e"></param>
         private void OnSkeletonFrameReady(object sender, SkeletonFrameReadyEventArgs e)
         {
-            using (SkeletonFrame frame = e.OpenSkeletonFrame())
+            using (SkeletonFrame frame = e.OpenSkeletonFrame())//
             {
                 if (frame == null)
                     return;
@@ -422,5 +514,270 @@ namespace Fizbin.Kinect.Gestures.Demo
 
         #endregion Event Handlers
 
+    
+
+
+    ///////////////////////// SPEECH CODE /////////////////////////////////////
+
+
+        /// <summary>
+        /// Resource key for medium-gray-colored brush.
+        /// </summary>
+        private const string MediumGreyBrushKey = "MediumGreyBrush";
+
+        /// <summary>
+        /// Map between each direction and the direction immediately to its left.
+        /// </summary>
+        private static readonly Dictionary<LightState, LightState> OppositeState = new Dictionary<LightState, LightState>
+            {
+                { LightState.On, LightState.Off },
+                { LightState.Off, LightState.On }
+            };
+
+        /// <summary>
+        /// Active Kinect sensor.
+        /// </summary>
+        private KinectSensor sensor;
+
+        /// <summary>
+        /// Speech recognition engine using audio data from Kinect.
+        /// </summary>
+        private SpeechRecognitionEngine speechEngine;
+
+        /// <summary>
+        /// Current direction where turtle is facing.
+        /// </summary>
+        private LightState currentLightState = LightState.Off;
+
+        /// <summary>
+        /// List of all UI span elements used to select recognized text.
+        /// </summary>
+        private List<Span> recognitionSpans;
+
+        /// <summary>
+        /// Enumeration of directions in which turtle may be facing.
+        /// </summary>
+        private enum LightState
+        {
+            On,
+            Off,
+        }
+        
+        /// <summary>
+        /// Gets the metadata for the speech recognizer (acoustic model) most suitable to
+        /// process audio from Kinect device.
+        /// </summary>
+        /// <returns>
+        /// RecognizerInfo if found, <code>null</code> otherwise.
+        /// </returns>
+        private static RecognizerInfo GetKinectRecognizer()
+        {
+            foreach (RecognizerInfo recognizer in SpeechRecognitionEngine.InstalledRecognizers())
+            {
+                string value;
+                recognizer.AdditionalInfo.TryGetValue("Kinect", out value);
+                if ("True".Equals(value, StringComparison.OrdinalIgnoreCase) && "en-US".Equals(recognizer.Culture.Name, StringComparison.OrdinalIgnoreCase))
+                {
+                    return recognizer;
+                }
+            }
+            
+            return null;
+        }
+
+        /// <summary>
+        /// Execute initialization tasks.
+        /// </summary>
+        /// <param name="sender">object sending the event</param>
+        /// <param name="e">event arguments</param>
+        private void WindowLoaded(object sender, RoutedEventArgs e)
+        {
+            Console.WriteLine("WindowLoaded");
+            // Look through all sensors and start the first connected one.
+            // This requires that a Kinect is connected at the time of app startup.
+            // To make your app robust against plug/unplug, 
+            // it is recommended to use KinectSensorChooser provided in Microsoft.Kinect.Toolkit (See components in Toolkit Browser).
+            foreach (var potentialSensor in KinectSensor.KinectSensors)
+            {
+                if (potentialSensor.Status == KinectStatus.Connected)
+                {
+                    this.sensor = potentialSensor;
+                    break;
+                }
+            }
+
+            if (null != this.sensor)
+            {
+                try
+                {
+                    // Start the sensor!
+                    this.sensor.Start();
+                }
+                catch (IOException)
+                {
+                    // Some other application is streaming from the same Kinect sensor
+                    this.sensor = null;
+                }
+            }
+
+            if (null == this.sensor)
+            {
+                //this.statusBarText.Text = Properties.Resources.NoKinectReady;
+                return;
+            }
+
+            RecognizerInfo ri = GetKinectRecognizer();
+
+            if (null != ri)
+            {
+                //recognitionSpans = new List<Span> { onSpan, offSpan, oppositeSpan };
+
+                this.speechEngine = new SpeechRecognitionEngine(ri.Id);
+
+                /****************************************************************
+                * 
+                * Use this code to create grammar programmatically rather than from
+                * a grammar file.
+                * 
+                * var directions = new Choices();
+                * directions.Add(new SemanticResultValue("forward", "FORWARD"));
+                * directions.Add(new SemanticResultValue("forwards", "FORWARD"));
+                * directions.Add(new SemanticResultValue("straight", "FORWARD"));
+                * directions.Add(new SemanticResultValue("backward", "BACKWARD"));
+                * directions.Add(new SemanticResultValue("backwards", "BACKWARD"));
+                * directions.Add(new SemanticResultValue("back", "BACKWARD"));
+                * directions.Add(new SemanticResultValue("turn left", "LEFT"));
+                * directions.Add(new SemanticResultValue("turn right", "RIGHT"));
+                *
+                * var gb = new GrammarBuilder { Culture = ri.Culture };
+                * gb.Append(directions);
+                *
+                * var g = new Grammar(gb);
+                * 
+                ****************************************************************/
+                string str = System.IO.File.ReadAllText(@"C:\Users\Derek\Documents\GitHub\cse-118-yolo-secret-ninja\Fizbin.Kinect.Gestures-master\Fizbin.Kinect.Gestures-master\Fizbin.Kinect.Gestures.Demo\SpeechGrammar.xml"); //Properties.Resources.SpeechGrammar;
+                Console.WriteLine("speech grammar " + str);
+                byte[] grammarz = Encoding.ASCII.GetBytes(str);
+                int i = 023 + 2;
+                Console.WriteLine("hi");
+                // Create a grammar from grammar definition XML file.
+                using (var memoryStream = new MemoryStream(grammarz))
+                {
+                    var g = new Grammar(memoryStream);
+                    speechEngine.LoadGrammar(g);
+                }
+
+                speechEngine.SpeechRecognized += SpeechRecognized;
+                speechEngine.SpeechRecognitionRejected += SpeechRejected;
+
+                // For long recognition sessions (a few hours or more), it may be beneficial to turn off adaptation of the acoustic model. 
+                // This will prevent recognition accuracy from degrading over time.
+                ////speechEngine.UpdateRecognizerSetting("AdaptationOn", 0);
+
+                speechEngine.SetInputToAudioStream(
+                    sensor.AudioSource.Start(), new SpeechAudioFormatInfo(EncodingFormat.Pcm, 16000, 16, 1, 32000, 2, null));
+                speechEngine.RecognizeAsync(RecognizeMode.Multiple);
+            }
+            else
+            {
+                //this.statusBarText.Text = Properties.Resources.NoSpeechRecognizer;
+            }
+        }
+
+        /// <summary>
+        /// Execute uninitialization tasks.
+        /// </summary>
+        /// <param name="sender">object sending the event.</param>
+        /// <param name="e">event arguments.</param>
+        private void WindowClosing(object sender, CancelEventArgs e)
+        {
+            if (null != this.sensor)
+            {
+                this.sensor.AudioSource.Stop();
+
+                this.sensor.Stop();
+                this.sensor = null;
+            }
+
+            if (null != this.speechEngine)
+            {
+                this.speechEngine.SpeechRecognized -= SpeechRecognized;
+                this.speechEngine.SpeechRecognitionRejected -= SpeechRejected;
+                this.speechEngine.RecognizeAsyncStop();
+            }
+        }
+
+        /// <summary>
+        /// Remove any highlighting from recognition instructions.
+        /// </summary>
+        private void ClearRecognitionHighlights()
+        {
+       /*     foreach (Span span in recognitionSpans)
+            {
+                span.Foreground = (Brush)this.Resources[MediumGreyBrushKey];
+                span.FontWeight = FontWeights.Normal;
+            }*/
+        }
+
+        /// <summary>
+        /// Handler for recognized speech events.
+        /// </summary>
+        /// <param name="sender">object sending the event.</param>
+        /// <param name="e">event arguments.</param>
+        private void SpeechRecognized(object sender, SpeechRecognizedEventArgs e)
+        {
+            // Speech utterance confidence below which we treat speech as if it hadn't been heard
+            const double ConfidenceThreshold = 0.5;
+            Console.WriteLine("speech recognized");
+
+            ClearRecognitionHighlights();
+
+            if (e.Result.Confidence >= ConfidenceThreshold)
+            {
+                Console.WriteLine("hello");
+                Console.WriteLine(e.Result.Text.ToString());
+                Console.WriteLine(e.Result.Semantics.Value.ToString());
+                MODE = e.Result.Semantics.Value.ToString();
+                //switch (e.Result.Semantics.Value.ToString())
+                //{
+
+                //    case "LIGHTS OPPOSITE":
+                //        oppositeSpan.Foreground = Brushes.DeepSkyBlue;
+                //        oppositeSpan.FontWeight = FontWeights.Bold;
+                //        currentLightState = OppositeState[currentLightState];
+                //        if( currentLightState.Equals(LightState.On)) {
+                //            turtle.Visibility = Visibility.Collapsed;
+                //        } else {
+                //            turtle.Visibility = Visibility.Visible;
+                //        }
+                //        break;
+
+                //    case "LIGHTS OFF":
+                //        offSpan.Foreground = Brushes.DeepSkyBlue;
+                //        offSpan.FontWeight = FontWeights.Bold;
+                //        currentLightState = LightState.Off;
+                //        turtle.Visibility = Visibility.Collapsed;
+                //        break;
+
+                //    case "LIGHTS ON":
+                //        onSpan.Foreground = Brushes.DeepSkyBlue;
+                //        onSpan.FontWeight = FontWeights.Bold;
+                //        currentLightState = LightState.Off;
+                //        turtle.Visibility = Visibility.Visible;
+                //        break;
+                //}
+            }
+        }
+
+        /// <summary>
+        /// Handler for rejected speech events.
+        /// </summary>
+        /// <param name="sender">object sending the event.</param>
+        /// <param name="e">event arguments.</param>
+        private void SpeechRejected(object sender, SpeechRecognitionRejectedEventArgs e)
+        {
+            ClearRecognitionHighlights();
+        }
     }
 }
+

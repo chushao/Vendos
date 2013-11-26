@@ -1,6 +1,6 @@
 ﻿using Microsoft.Kinect;
 using System.Diagnostics;
-
+using System;
 namespace Fizbin.Kinect.Gestures.Segments
 {
     /// <summary>
@@ -17,18 +17,27 @@ namespace Fizbin.Kinect.Gestures.Segments
         {
 
             // right hand in front of right shoulder
-            if (skeleton.Joints[JointType.HandRight].Position.Z < skeleton.Joints[JointType.ElbowRight].Position.Z && skeleton.Joints[JointType.HandRight].Position.Y < skeleton.Joints[JointType.ShoulderCenter].Position.Y)
+            if (skeleton.Joints[JointType.HandRight].Position.Z < skeleton.Joints[JointType.ShoulderRight].Position.Z && skeleton.Joints[JointType.HandRight].Position.Y < skeleton.Joints[JointType.ShoulderCenter].Position.Y)
             {
-                // right hand below head height and hand higher than elbow
-                if (skeleton.Joints[JointType.HandRight].Position.Y < skeleton.Joints[JointType.Head].Position.Y && skeleton.Joints[JointType.HandRight].Position.Y > skeleton.Joints[JointType.ElbowRight].Position.Y)
+                //Console.WriteLine("Swipe Down 1 - 1");
+                // right hand higher than elbow
+                if (/*skeleton.Joints[JointType.HandRight].Position.Y < skeleton.Joints[JointType.Head].Position.Y && */skeleton.Joints[JointType.HandRight].Position.Y > skeleton.Joints[JointType.ElbowRight].Position.Y)
                 {
+                    //Console.WriteLine("Swipe Down 1 - 2");
+
                     // right hand right of right shoulder
-                    if (skeleton.Joints[JointType.HandRight].Position.X > skeleton.Joints[JointType.ShoulderRight].Position.X)
+                    if (skeleton.Joints[JointType.HandRight].Position.X > skeleton.Joints[JointType.ShoulderCenter].Position.X)
                     {
+                        //Console.WriteLine("Swipe Down 1 - Success");
+
                         return GesturePartResult.Succeed;
                     }
+                    //Console.WriteLine("Swipe Down 1 - Pausing");
+
                     return GesturePartResult.Pausing;
                 }
+                //Console.WriteLine("Swipe Down 1 - Fail");
+
                 return GesturePartResult.Fail;
             }
             return GesturePartResult.Fail;
