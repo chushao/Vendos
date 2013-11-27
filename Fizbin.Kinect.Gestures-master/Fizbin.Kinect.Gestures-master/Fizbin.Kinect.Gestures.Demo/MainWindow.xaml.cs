@@ -35,6 +35,7 @@ namespace Fizbin.Kinect.Gestures.Demo
         // CONSTANTS
         private const int TV_ON = 118;
         private const int TV_OFF = 117;
+        private const int TV_MUTE = 67;
         private const int CHANNEL_UP = 119;
         private const int CHANNEL_DOWN = 120;
         private const int VOLUME_UP = 121;
@@ -45,6 +46,7 @@ namespace Fizbin.Kinect.Gestures.Demo
         private const int LIGHT_ON = 106;
         private const int CURTAIN_OFF = 107;
         private const int CURTAIN_ON = 116;
+        
 
         // Variable intensity values
         private int light = LIGHT_OFF;              // [97 - 106]
@@ -373,38 +375,31 @@ namespace Fizbin.Kinect.Gestures.Demo
                     break;
                 case "SwipeLeft":
                     Gesture = "Swipe Left";
-                    if (tvIsOn && MODE.Equals(TV_MODE))
+                    if (MODE.Equals(TV_MODE))
                     {
-                        Console.WriteLine("VOLUME UP");
-                        if (ARDUINO_IN) this.SendCommandToArduino(VOLUME_UP);
+                        TurnTvVolumeUp();
                     }
                     else if (MODE.Equals(LIGHT_MODE))
                     {
-                        Console.WriteLine("LIGHT INCREASE");
-                        if (light < LIGHT_ON) light += 1;
-                        if (ARDUINO_IN) this.SendCommandToArduino(light);
+                        TurnLightUp();
                     }
                     break;
                 case "SwipeRight":
                     Gesture = "Swipe Right";
-                    if (tvIsOn && MODE.Equals(TV_MODE))
+                    if (MODE.Equals(TV_MODE))
                     {
-                        Console.WriteLine("VOLUME DOWN");
-                        if (ARDUINO_IN) this.SendCommandToArduino(VOLUME_DOWN);
+                        TurnTvVolumeDown();
                     }
                     else if (MODE.Equals(LIGHT_MODE))
                     {
-                        Console.WriteLine("LIGHT DECREASE");
-                        if (light > LIGHT_OFF) light -= 1;
-                        if (ARDUINO_IN) this.SendCommandToArduino(light);
+                        TurnLightDown();
                     }
                     break;
                 case "SwipeUp":
                     Gesture = "Swipe Up";
-                    if (tvIsOn && MODE.Equals(TV_MODE))
+                    if (MODE.Equals(TV_MODE))
                     {
-                        Console.WriteLine("CHANNEL UP");
-                        if (ARDUINO_IN) this.SendCommandToArduino(CHANNEL_UP);
+                        TurnTvChannelUp();
                     }
                     else if (MODE.Equals(APPLIANCE_MODE))
                     {
@@ -415,10 +410,9 @@ namespace Fizbin.Kinect.Gestures.Demo
                     break;
                 case "SwipeDown":
                     Gesture = "Swipe Down";
-                    if (tvIsOn && MODE.Equals(TV_MODE))
+                    if (MODE.Equals(TV_MODE))
                     {
-                        Console.WriteLine("CHANNEL DOWN");
-                        if (ARDUINO_IN) this.SendCommandToArduino(CHANNEL_DOWN);
+                        TurnTvChannelDown();
                     }
                     else if (MODE.Equals(APPLIANCE_MODE))
                     {
@@ -429,32 +423,24 @@ namespace Fizbin.Kinect.Gestures.Demo
                     break;
                 case "ZoomIn":
                     Gesture = "Zoom In";
-                    if (!tvIsOn && MODE.Equals(TV_MODE))
+                    if (MODE.Equals(TV_MODE))
                     {
-                        Console.WriteLine("TV ON");
-                        if (ARDUINO_IN) this.SendCommandToArduino(TV_ON);
-                        tvIsOn = true;
+                        TurnTvOn();
                     }
                     else if (MODE.Equals(LIGHT_MODE))
                     {
-                        Console.WriteLine("LIGHT ON");
-                        if (ARDUINO_IN) this.SendCommandToArduino(LIGHT_ON);
-                        light = LIGHT_ON;
+                        TurnLightOn();
                     }
                     break;
                 case "ZoomOut":
                     Gesture = "Zoom Out";
-                    if (tvIsOn && MODE.Equals(TV_MODE))
+                    if (MODE.Equals(TV_MODE))
                     {
-                        Console.WriteLine("TV OFF");
-                        if (ARDUINO_IN) this.SendCommandToArduino(TV_OFF);
-                        tvIsOn = false;
+                        TurnTvOff();
                     }
                     else if (MODE.Equals(LIGHT_MODE))
                     {
-                        Console.WriteLine("LIGHT ON");
-                        if (ARDUINO_IN) this.SendCommandToArduino(LIGHT_OFF);
-                        light = LIGHT_OFF;
+                        TurnLightOff();
                     }
                     break;
                 default:
@@ -465,6 +451,84 @@ namespace Fizbin.Kinect.Gestures.Demo
             //Console.WriteLine("HALLO " + Gesture);
             Console.WriteLine(MODE);
             _clearTimer.Start();
+        }
+
+        private void TurnLightDown()
+        {
+            Console.WriteLine("LIGHT DECREASE");
+            if (light > LIGHT_OFF) light -= 1;
+            if (ARDUINO_IN) this.SendCommandToArduino(light);
+        }
+
+        private void TurnLightUp()
+        {
+            Console.WriteLine("LIGHT INCREASE");
+            if (light < LIGHT_ON) light += 1;
+            if (ARDUINO_IN) this.SendCommandToArduino(light);
+        }
+
+        private void TurnTvChannelDown()
+        {
+            SendTvCommand("TV CHANNEL DOWN", CHANNEL_DOWN);
+        }
+
+        private void TurnTvChannelUp()
+        {
+            SendTvCommand("TV CHANNEL UP", CHANNEL_UP);
+        }
+
+        private void MuteTv()
+        {
+            SendTvCommand("MUTE TV", TV_MUTE);
+        }
+
+
+        private void TurnLightOn()
+        {
+            Console.WriteLine("LIGHT ON");
+            if (ARDUINO_IN) this.SendCommandToArduino(LIGHT_ON);
+            light = LIGHT_ON;
+        }
+
+        private void TurnLightOff()
+        {
+            Console.WriteLine("LIGHT OFF");
+            if (ARDUINO_IN) this.SendCommandToArduino(LIGHT_OFF);
+            light = LIGHT_OFF;
+        }
+
+        private void TurnTvVolumeDown()
+        {
+            SendTvCommand("TV VOLUME DOWN", VOLUME_DOWN);
+        }
+
+        private void TurnTvVolumeUp()
+        {
+            SendTvCommand("TV VOLUME UP", VOLUME_UP);
+        }
+
+        private void SendTvCommand(string cmd, int IR_Signal)
+        {
+            if (tvIsOn)
+            {
+                Console.WriteLine(cmd);
+                if (ARDUINO_IN) this.SendCommandToArduino(IR_Signal);
+            }
+        }
+
+        private void TurnTvOff()
+        {
+            SendTvCommand("TV OFF", TV_OFF);
+            tvIsOn = false;
+        }
+
+        private void TurnTvOn()
+        {
+            if (!tvIsOn)
+            {
+                tvIsOn = true;
+                SendTvCommand("TV ON", TV_ON);
+            }
         }
 
         /// <summary>
@@ -734,8 +798,8 @@ namespace Fizbin.Kinect.Gestures.Demo
                 //Console.WriteLine(e.Result.Text.ToString());
                 Console.WriteLine(e.Result.Semantics.Value.ToString());
                 MODE = e.Result.Semantics.Value.ToString();
-                //switch (e.Result.Semantics.Value.ToString())
-                //{
+                switch (e.Result.Semantics.Value.ToString())
+                {
 
                 //    case "LIGHTS OPPOSITE":
                 //        oppositeSpan.Foreground = Brushes.DeepSkyBlue;
@@ -761,7 +825,42 @@ namespace Fizbin.Kinect.Gestures.Demo
                 //        currentLightState = LightState.Off;
                 //        turtle.Visibility = Visibility.Visible;
                 //        break;
-                //}
+                    case "LIGHTS ON":
+                        TurnLightOn();
+                        break;
+                    case "LIGHTS OFF":
+                        TurnLightOff();
+                        break;
+                    case "CURTAINS OPEN":
+                        break;
+                    case "CURTAINS CLOSE":
+                        break;
+                    case "TELEVISION ON":
+                        TurnTvOn();
+                        break;
+                    case "TELEVISION OFF":
+                        TurnTvOff();
+                        break;
+                    case "TELEVISION CHANNEL UP":
+                        TurnTvChannelUp();
+                        break;
+                    case "TELEVISION CHANNEL DOWN":
+                        TurnTvChannelDown();
+                        break;
+                    case "TELEVISION VOLUME UP":
+                        TurnTvVolumeUp();
+                        break;
+                    case "TELEVISION VOLUME DOWN":
+                        TurnTvVolumeDown();
+                        break;
+                    case "TELEVISION MUTE":
+                        MuteTv();
+                        break;
+                    case "TELEVISION CHANNEL FOOD NETWORK":
+                        break;
+
+
+                }
             }
         }
 
