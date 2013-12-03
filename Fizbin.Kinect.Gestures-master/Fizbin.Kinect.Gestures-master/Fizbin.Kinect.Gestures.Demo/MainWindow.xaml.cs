@@ -46,6 +46,7 @@ namespace Fizbin.Kinect.Gestures.Demo
         private const int LIGHT_ON = 106;
         private const int CURTAIN_OFF = 107;
         private const int CURTAIN_ON = 116;
+        private const int TV_CHANNEL_FOOD_NETWORK = 123;
         
 
         // Variable intensity values
@@ -477,6 +478,11 @@ namespace Fizbin.Kinect.Gestures.Demo
             SendTvCommand("TV CHANNEL UP", CHANNEL_UP);
         }
 
+        private void ChangeTvChannel()
+        {
+            SendTvCommand("TV CHANNEL CHANGE", TV_CHANNEL_FOOD_NETWORK);
+        }
+
         private void MuteTv()
         {
             SendTvCommand("MUTE TV", TV_MUTE);
@@ -846,6 +852,7 @@ namespace Fizbin.Kinect.Gestures.Demo
                         MuteTv();
                         break;
                     case "TELEVISION CHANNEL FOOD NETWORK":
+                        ChangeTvChannel();
                         break;
 
 
