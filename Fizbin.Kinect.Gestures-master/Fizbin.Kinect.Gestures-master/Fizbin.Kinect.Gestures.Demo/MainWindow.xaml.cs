@@ -305,7 +305,7 @@ namespace Fizbin.Kinect.Gestures.Demo
 
         #region Event Handlers
 
-        private void OnRaiseTheRoof()
+        private void PartyTime()
         {
             System.Media.SoundPlayer player = new System.Media.SoundPlayer(@"C:\Users\Derek\Documents\GitHub\cse-118-yolo-secret-ninja\Fizbin.Kinect.Gestures-master\Fizbin.Kinect.Gestures-master\Fizbin.Kinect.Gestures.Demo\Pikachu.wav");
             player.Play();
@@ -359,7 +359,7 @@ namespace Fizbin.Kinect.Gestures.Demo
             {
                 case "RaiseTheRoof":
                     Gesture = "Raise The Roof!";
-                    this.OnRaiseTheRoof();
+                    this.PartyTime();
                     break;
                 case "Menu":
                     Gesture = "Menu";
@@ -545,6 +545,34 @@ namespace Fizbin.Kinect.Gestures.Demo
             }
         }
 
+        private void OvenReset()
+        {
+            this.SendCommandToArduino(61);
+        }
+
+        private void OvenPreheat(int temperature)
+        {
+            int command_num = 61;
+            switch (temperature)
+            {
+                case 350:
+                    command_num = 62;
+                    break;
+                case 375:
+                    command_num = 63;
+                    break;
+                case 400:
+                    command_num = 64;
+                    break;
+                case 425:
+                    command_num = 65;
+                    break;
+                case 450:
+                    command_num = 66;
+                    break;
+            }
+            this.SendCommandToArduino(command_num);
+        }
         /// <summary>
         /// 
         /// </summary>
@@ -854,7 +882,16 @@ namespace Fizbin.Kinect.Gestures.Demo
                     case "TELEVISION CHANNEL FOOD NETWORK":
                         ChangeTvChannel();
                         break;
-
+                    case "OVEN RESET":
+                        OvenReset();
+                        break;
+                    case "OVEN PREHEAT":
+                        OvenPreheat(int.Parse(e.Result.Semantics["temperature"].Value.ToString()));
+                        break;
+                    case "PARTY TIME":
+                        PartyTime();
+                        break;
+                        
 
                 }
             }
