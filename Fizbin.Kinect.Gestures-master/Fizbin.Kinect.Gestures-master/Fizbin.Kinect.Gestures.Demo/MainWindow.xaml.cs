@@ -46,6 +46,7 @@ namespace Fizbin.Kinect.Gestures.Demo
         private const int LIGHT_ON = 106;
         private const int CURTAIN_OFF = 107;
         private const int CURTAIN_ON = 116;
+        private const int TV_CHANNEL_FOOD_NETWORK = 123;
         
 
         // Variable intensity values
@@ -477,6 +478,11 @@ namespace Fizbin.Kinect.Gestures.Demo
             SendTvCommand("TV CHANNEL UP", CHANNEL_UP);
         }
 
+        private void ChangeTvChannel()
+        {
+            SendTvCommand("TV CHANNEL CHANGE", TV_CHANNEL_FOOD_NETWORK);
+        }
+
         private void MuteTv()
         {
             SendTvCommand("MUTE TV", TV_MUTE);
@@ -495,6 +501,14 @@ namespace Fizbin.Kinect.Gestures.Demo
             Console.WriteLine("LIGHT OFF");
             if (ARDUINO_IN) this.SendCommandToArduino(LIGHT_OFF);
             light = LIGHT_OFF;
+        }
+
+        private void DimLight(int level)
+        {
+            Console.WriteLine("LIGHT DIM " + level);
+            int light_state = LIGHT_OFF + (level % 6);
+            light = light_state;
+            if (ARDUINO_IN) this.SendCommandToArduino(light);
         }
 
         private void TurnTvVolumeDown()
@@ -716,7 +730,7 @@ namespace Fizbin.Kinect.Gestures.Demo
                 * var g = new Grammar(gb);
                 * 
                 ****************************************************************/
-                string str = System.IO.File.ReadAllText(@"C:\Users\Derek\Documents\GitHub\cse-118-yolo-secret-ninja\Fizbin.Kinect.Gestures-master\Fizbin.Kinect.Gestures-master\Fizbin.Kinect.Gestures.Demo\SpeechGrammar.xml"); //Properties.Resources.SpeechGrammar;
+                string str = System.IO.File.ReadAllText(@"C:\Users\Patrick\Documents\GitHub\cse-118-yolo-secret-ninja\Fizbin.Kinect.Gestures-master\Fizbin.Kinect.Gestures-master\Fizbin.Kinect.Gestures.Demo\SpeechGrammar.xml"); //Properties.Resources.SpeechGrammar;
                 Console.WriteLine("speech grammar " + str);
                 byte[] grammarz = Encoding.ASCII.GetBytes(str);
                 int i = 023 + 2;
@@ -796,40 +810,21 @@ namespace Fizbin.Kinect.Gestures.Demo
             if (e.Result.Confidence >= ConfidenceThreshold)
             {
                 //Console.WriteLine(e.Result.Text.ToString());
-                Console.WriteLine(e.Result.Semantics.Value.ToString());
-                MODE = e.Result.Semantics.Value.ToString();
-                switch (e.Result.Semantics.Value.ToString())
+                Console.WriteLine(e.Result.Semantics["action"].Value.ToString());
+                MODE = e.Result.Semantics["action"].Value.ToString();
+                switch (e.Result.Semantics["action"].Value.ToString())
                 {
-
-                //    case "LIGHTS OPPOSITE":
-                //        oppositeSpan.Foreground = Brushes.DeepSkyBlue;
-                //        oppositeSpan.FontWeight = FontWeights.Bold;
-                //        currentLightState = OppositeState[currentLightState];
-                //        if( currentLightState.Equals(LightState.On)) {
-                //            turtle.Visibility = Visibility.Collapsed;
-                //        } else {
-                //            turtle.Visibility = Visibility.Visible;
-                //        }
-                //        break;
-
-                //    case "LIGHTS OFF":
-                //        offSpan.Foreground = Brushes.DeepSkyBlue;
-                //        offSpan.FontWeight = FontWeights.Bold;
-                //        currentLightState = LightState.Off;
-                //        turtle.Visibility = Visibility.Collapsed;
-                //        break;
-
-                //    case "LIGHTS ON":
-                //        onSpan.Foreground = Brushes.DeepSkyBlue;
-                //        onSpan.FontWeight = FontWeights.Bold;
-                //        currentLightState = LightState.Off;
-                //        turtle.Visibility = Visibility.Visible;
-                //        break;
+                    case "HELP":
+                        CallSomeone(e.Result.Text.ToString());
+                        break;
                     case "LIGHTS ON":
                         TurnLightOn();
                         break;
                     case "LIGHTS OFF":
                         TurnLightOff();
+                        break;
+                    case "LIGHTS DIM":
+                        DimLight(int.Parse(e.Result.Semantics["level"].Value.ToString()));
                         break;
                     case "CURTAINS OPEN":
                         break;
@@ -857,6 +852,7 @@ namespace Fizbin.Kinect.Gestures.Demo
                         MuteTv();
                         break;
                     case "TELEVISION CHANNEL FOOD NETWORK":
+                        ChangeTvChannel();
                         break;
 
 
