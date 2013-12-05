@@ -42,4 +42,3 @@ C:\Users\Derek\Documents\GitHub\cse-118-yolo-secret-ninja\Fizbin.Kinect.Gestures
 C:\Users\Derek\Documents\GitHub\cse-118-yolo-secret-ninja\Fizbin.Kinect.Gestures-master\KinectWpfViewers\obj\Debug\Microsoft.Samples.Kinect.WpfViewers.csproj.GenerateResource.Cache
 C:\Users\Derek\Documents\GitHub\cse-118-yolo-secret-ninja\Fizbin.Kinect.Gestures-master\KinectWpfViewers\obj\Debug\Microsoft.Samples.Kinect.WpfViewers.dll
 C:\Users\Derek\Documents\GitHub\cse-118-yolo-secret-ninja\Fizbin.Kinect.Gestures-master\KinectWpfViewers\obj\Debug\Microsoft.Samples.Kinect.WpfViewers.pdb
-C:\Users\Derek\Documents\GitHub\cse-118-yolo-secret-ninja\Fizbin.Kinect.Gestures-master\KinectWpfViewers\obj\Debug\Microsoft.Samples.Kinect.WpfViewers.csprojResolveAssemblyReference.cache
