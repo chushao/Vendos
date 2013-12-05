@@ -5,9 +5,6 @@
         <ruleref uri="#lightsRule"/>
       </item>
       <item>
-        <ruleref uri="#curtainsRule"/>
-      </item>
-      <item>
         <ruleref uri="#televisionRules"/>
       </item>
       <item>
@@ -24,6 +21,55 @@
       -->
     </one-of>
   </rule>
+
+
+  <rule id="partyTime">
+    <tag>out.action="PARTY TIME";</tag>
+    <one-of>
+      <item>it is</item>
+      <item>it's</item>
+    </one-of>
+    <item>party time</item>
+  </rule>
+
+  <rule id="ovenRules">
+    <one-of>
+      <item>
+        <tag>out.action="OVEN PREHEAT";</tag>
+        <item>oven</item>
+        <item>preheat</item>
+        <item repeat="0-1">to</item>
+        <one-of>
+          <item>
+            <tag>out.temperature = 350;</tag>
+            three hundred fifty
+          </item>
+          <item>
+            <tag>out.temperature = 375;</tag>
+            three hundred seventy five
+          </item>
+          <item>
+            <tag>out.temperature = 400;</tag>
+            four hundred
+          </item>
+          <item>
+            <tag>out.temperature = 425;</tag>
+            four hundred twenty five
+          </item>
+          <item>
+            <tag>out.temperature = 450;</tag>
+            four hundred fifty
+          </item>
+        </one-of>
+        <item>degrees</item>
+      </item>
+      <item>
+        <tag>out.action="OVEN RESET";</tag>
+        oven reset
+      </item>
+    </one-of>
+  </rule>
+
 
   <rule id="emergencyRules">
     <item>
@@ -144,44 +190,6 @@
             <tag>out.level=5;</tag>
             five
           </item>
-        </one-of>
-      </item>
-    </one-of>
-  </rule>
-
-  <rule id="curtainsRule">
-    <example>curtains close</example>
-    <example>curtains open</example>
-    <example>curtains open 50 percent</example>
-    <example>curtains open halfway</example>
-
-    <ruleref uri="#curtainsActions"/>
-    <item>the</item>
-    <ruleref uri="#curtainsSynonyms"/>
-    <tag>out.action=rules.curtainsActions;</tag>
-  </rule>
-
-  <rule id="curtainsSynonyms">
-    <one-of>
-      <item>curtains</item>
-      <item>curtain</item>
-      <item>shades</item>
-    </one-of>
-    <ruleref uri="#curtainsActions"/>
-  </rule>
-
-  <rule id="curtainsActions">
-    <one-of>
-      <item>
-        <tag>out.action="CURTAINS CLOSE";</tag>
-        <one-of>
-          <item>close</item>
-        </one-of>
-      </item>
-      <item>
-        <tag>out.action="CURTAINS OPEN";</tag>
-        <one-of>
-          <item>open</item>
         </one-of>
       </item>
     </one-of>

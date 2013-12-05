@@ -305,11 +305,14 @@ namespace Fizbin.Kinect.Gestures.Demo
 
         #region Event Handlers
 
-        private void OnRaiseTheRoof()
+        private static readonly string PathToMusic = @"C:\Users\Derek\Documents\GitHub\cse-118-yolo-secret-ninja\Fizbin.Kinect.Gestures-master\Fizbin.Kinect.Gestures-master\Fizbin.Kinect.Gestures.Demo\";
+
+        private void PartyTime()
+
         {
-            System.Media.SoundPlayer player = new System.Media.SoundPlayer(@"C:\Users\Derek\Documents\GitHub\cse-118-yolo-secret-ninja\Fizbin.Kinect.Gestures-master\Fizbin.Kinect.Gestures-master\Fizbin.Kinect.Gestures.Demo\Pikachu.wav");
+            System.Media.SoundPlayer player = new System.Media.SoundPlayer(PathToMusic + "partymusic.wav");
             player.Play();
-            CallSomeone("It's PARTY TIME!!!");
+            CallSomeone("It's time to party!! 123 Mulberry St.\n");
         }
 
         private void SleepTime()
@@ -334,7 +337,7 @@ namespace Fizbin.Kinect.Gestures.Demo
         {
             Voice v = new Voice("koaswift@gmail.com", "cse118team8");
             v.Call("+19255481182", "koaswift@gmail.com");               // Call from Google Voice Account -> Gmail account (Must have window open)
-            // v.SendSMS("+19255481182", msg + " - Kirsten's Phone");
+            v.SendSMS("+19255481182", msg + " - Kirsten's Phone");
             v.SendSMS("+17027684490", msg + " - Derek's Phone");
 
         }
@@ -359,7 +362,7 @@ namespace Fizbin.Kinect.Gestures.Demo
             {
                 case "RaiseTheRoof":
                     Gesture = "Raise The Roof!";
-                    this.OnRaiseTheRoof();
+                    this.PartyTime();
                     break;
                 case "Menu":
                     Gesture = "Menu";
@@ -492,6 +495,8 @@ namespace Fizbin.Kinect.Gestures.Demo
         private void TurnLightOn()
         {
             Console.WriteLine("LIGHT ON");
+            System.Media.SoundPlayer player = new System.Media.SoundPlayer(PathToMusic + "Pikachu.wav");
+            player.Play();
             if (ARDUINO_IN) this.SendCommandToArduino(LIGHT_ON);
             light = LIGHT_ON;
         }
@@ -532,8 +537,11 @@ namespace Fizbin.Kinect.Gestures.Demo
 
         private void TurnTvOff()
         {
-            SendTvCommand("TV OFF", TV_OFF);
-            tvIsOn = false;
+            if (tvIsOn)
+            {
+                SendTvCommand("TV OFF", TV_OFF);
+                tvIsOn = false;
+            }
         }
 
         private void TurnTvOn()
@@ -542,7 +550,41 @@ namespace Fizbin.Kinect.Gestures.Demo
             {
                 tvIsOn = true;
                 SendTvCommand("TV ON", TV_ON);
+                System.Media.SoundPlayer player = new System.Media.SoundPlayer(PathToMusic + "Pikachu.wav");
+                player.Play();
             }
+        }
+
+
+        private void OvenReset()
+        {
+            if (ARDUINO_IN) this.SendCommandToArduino(61);
+        }
+
+        private void OvenPreheat(int temperature)
+        {
+            int command_num = 61;
+            switch (temperature)
+            {
+                case 350:
+                    command_num = 62;
+                    break;
+                case 375:
+                    command_num = 63;
+                    break;
+                case 400:
+                    command_num = 64;
+                    break;
+                case 425:
+                    command_num = 65;
+                    break;
+                case 450:
+                    command_num = 66;
+                    break;
+            }
+            if (ARDUINO_IN) this.SendCommandToArduino(command_num);
+            System.Media.SoundPlayer player = new System.Media.SoundPlayer(PathToMusic + "Pikachu.wav");
+            player.Play();
         }
 
         /// <summary>
@@ -730,11 +772,9 @@ namespace Fizbin.Kinect.Gestures.Demo
                 * var g = new Grammar(gb);
                 * 
                 ****************************************************************/
-                string str = System.IO.File.ReadAllText(@"C:\Users\Patrick\Documents\GitHub\cse-118-yolo-secret-ninja\Fizbin.Kinect.Gestures-master\Fizbin.Kinect.Gestures-master\Fizbin.Kinect.Gestures.Demo\SpeechGrammar.xml"); //Properties.Resources.SpeechGrammar;
+                string str = System.IO.File.ReadAllText(@"C:\Users\Derek\Documents\GitHub\cse-118-yolo-secret-ninja\Fizbin.Kinect.Gestures-master\Fizbin.Kinect.Gestures-master\Fizbin.Kinect.Gestures.Demo\SpeechGrammar.xml"); //Properties.Resources.SpeechGrammar;
                 Console.WriteLine("speech grammar " + str);
                 byte[] grammarz = Encoding.ASCII.GetBytes(str);
-                int i = 023 + 2;
-                Console.WriteLine("hi");
                 // Create a grammar from grammar definition XML file.
                 using (var memoryStream = new MemoryStream(grammarz))
                 {
@@ -809,12 +849,25 @@ namespace Fizbin.Kinect.Gestures.Demo
 
             if (e.Result.Confidence >= ConfidenceThreshold)
             {
-                //Console.WriteLine(e.Result.Text.ToString());
+                Console.WriteLine(e.Result.Text.ToString());
                 Console.WriteLine(e.Result.Semantics["action"].Value.ToString());
-                MODE = e.Result.Semantics["action"].Value.ToString();
+
                 switch (e.Result.Semantics["action"].Value.ToString())
                 {
+                    case "TELEVISION MODE":
+                        MODE = e.Result.Semantics["action"].Value.ToString();
+                        break;
+                    case "APPLIANCE MODE":
+                        MODE = e.Result.Semantics["action"].Value.ToString();
+                        break;
+                    case "GENERAL MODE":
+                        break;
+                    case "LIGHTS MODE":
+                        MODE = e.Result.Semantics["action"].Value.ToString();
+                        break;
                     case "HELP":
+                        System.Media.SoundPlayer player = new System.Media.SoundPlayer(PathToMusic + "Help.wav");
+                        player.Play();
                         CallSomeone(e.Result.Text.ToString());
                         break;
                     case "LIGHTS ON":
@@ -825,10 +878,6 @@ namespace Fizbin.Kinect.Gestures.Demo
                         break;
                     case "LIGHTS DIM":
                         DimLight(int.Parse(e.Result.Semantics["level"].Value.ToString()));
-                        break;
-                    case "CURTAINS OPEN":
-                        break;
-                    case "CURTAINS CLOSE":
                         break;
                     case "TELEVISION ON":
                         TurnTvOn();
