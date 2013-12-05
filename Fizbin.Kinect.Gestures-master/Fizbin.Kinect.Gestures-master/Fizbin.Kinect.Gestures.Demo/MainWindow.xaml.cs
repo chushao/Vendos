@@ -903,7 +903,16 @@ namespace Fizbin.Kinect.Gestures.Demo
                     case "TELEVISION CHANNEL FOOD NETWORK":
                         ChangeTvChannel();
                         break;
-
+                    case "OVEN RESET":
+                        OvenReset();
+                        break;
+                    case "OVEN PREHEAT":
+                        OvenPreheat(int.Parse(e.Result.Semantics["temperature"].Value.ToString()));
+                        break;
+                    case "PARTY TIME":
+                        PartyTime();
+                        break;
+                        
 
                 }
             }

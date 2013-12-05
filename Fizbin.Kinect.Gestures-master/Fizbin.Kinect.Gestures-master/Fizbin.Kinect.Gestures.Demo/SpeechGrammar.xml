@@ -11,7 +11,13 @@
         <ruleref uri="#modeSwapRules" />
       </item>
       <item>
+        <ruleref uri="#ovenRules" />
+      </item>
+      <item>
         <ruleref uri="#emergencyRules" />
+      </item>
+      <item>
+        <ruleref uri="#partyTime" />
       </item>
       <!--
       <item>
@@ -22,9 +28,14 @@
     </one-of>
   </rule>
 
+<<<<<<< HEAD
 
   <rule id="partyTime">
     <tag>out.action="PARTY TIME";</tag>
+=======
+  <rule id="partyTime">
+    <tag>out="PARTY TIME";</tag>
+>>>>>>> d1656e256bc7c6a38d60b2641bae9fdbe53d44ac
     <one-of>
       <item>it is</item>
       <item>it's</item>
@@ -42,6 +53,7 @@
         <one-of>
           <item>
             <tag>out.temperature = 350;</tag>
+<<<<<<< HEAD
             three hundred fifty
           </item>
           <item>
@@ -59,6 +71,25 @@
           <item>
             <tag>out.temperature = 450;</tag>
             four hundred fifty
+=======
+            350
+          </item>
+          <item>
+            <tag>out.temperature = 375;</tag>
+            375
+          </item>
+          <item>
+            <tag>out.temperature = 400;</tag>
+            400
+          </item>
+          <item>
+            <tag>out.temperature = 425;</tag>
+            425
+          </item>
+          <item>
+            <tag>out.temperature = 450;</tag>
+            450
+>>>>>>> d1656e256bc7c6a38d60b2641bae9fdbe53d44ac
           </item>
         </one-of>
         <item>degrees</item>
@@ -70,7 +101,10 @@
     </one-of>
   </rule>
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> d1656e256bc7c6a38d60b2641bae9fdbe53d44ac
   <rule id="emergencyRules">
     <item>
       <tag>out.action="HELP";</tag>
