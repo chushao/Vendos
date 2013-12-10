@@ -377,13 +377,14 @@ Voice detection also tends to be too sensitive, catching background noise and no
  
 Some current gestures, such as “Swipe Down” and gestures involving multiple body parts are more troublesome to detect than others, perhaps in future implementations, better gestures can be decided upon and implemented.
 
-Due to time constraints, we were unable to test and benchmark the relay circuit.
-However, we expect that it should be function and very easy to debug since there are only 2 kinds of inputs and 2 kinds of output (ON or OFF).
-One possible challenge with this method is that it is wired; if the user wanted to control an appliance from a long distance (e.x. on the other side of a bedroom), then they would have to connect a correspondingly-lengthened wire from the Arduino to the appliance, which could be cumbersome and intrusive for the user to install.
-
 % =============================================================================
 \section{Evaluation (Hardware)}
 % =============================================================================
+
+
+Due to time constraints, we were unable to test and benchmark the relay circuit.
+However, we expect that it should be function and very easy to debug since there are only 2 kinds of inputs and 2 kinds of output (ON or OFF).
+One possible challenge with this method is that it is wired; if the user wanted to control an appliance from a long distance (e.x. on the other side of a bedroom), then they would have to connect a correspondingly-lengthened wire from the Arduino to the appliance, which could be cumbersome and intrusive for the user to install.
 
 The regulator circuit worked satisfactorily as the LED light bulb brightened all the way to the brightest it can be as well as dimmed all the way to being turned off on command.
 Unfortunately, one limitation with our implementation is that it only works with DC loads, which disallows this circuit to be used with room lights and common household lamps.
@@ -416,7 +417,7 @@ In addition, as our primary target audience is towards the elderly, most of the 
 Thus, we chose to focus on just core components of objects in an elderly home: lights, television and appliances.
 By building around such objects, we were able to buy consumer parts and built a very cost efficient prototype.
 Not including the cost of the Arduino and the Kinect, the price of other parts totaled only \$15.86.
- 
+
 While this price is how much we spent buying the parts individually as consumers, if mass-produced the price would go down as well.
 For example, at the time of writing this paper, the stepper motor we purchased costs \$5.12 but if we purchased with bulk quantity and pricing, it would be as low as \$0.10 per stepper motor \cite{_stepper_motor}.
 By using open source technologies such as Arduino \cite{_arduino_policy}, we are able to keep the cost down, even with future implementations of more features to simplify use.
