@@ -428,12 +428,13 @@ We change degrees of brightness through Kinect sending the Arduino multiple puls
 For an elderly home, those are the main sources of daily usage. We designed this project to be modular as each individual example is a template for multiple custom device designs.
 The same template used to control lights can be used to control any AC wall outlet devices that have multiple levels of intensities, such as fans, or even Christmas lights for decoration.
 The design for an oven knob control has a base of a stepper motor, which can also be used to move curtains and can be a base template of any contraption that requires motion movement.
-In addition, with the implementation of voice and gesture recognition, having an emphasis on the safety of the elderly user is key as regardless of how simplified a home automated room is, they might still be prone to accidents. 
+In addition, with the implementation of gesture and voice recognition, having an emphasis on the safety of the elderly user is paramount.
+Regardless of how simple an automated home is, they might still be prone to accidents. 
 
 In the future, we would like to implement motion detection for safety as well.
-For example, if an elderly has fallen the Kinect can detect such movements and instantly call an emergency number.
-Using multiple Kinect devices and using Kinect Fusion \cite{_kinect_fusion} to construct a composite 3D model of the users entire skeleton from multiple angles could be useful to build a model accurate enough for this application.
-At the moment however, Kinect Fusion is slow using the Kinect and would require increases in speed spread over many low power devices or a single high powered machine in the home. 
+For example, if an elderly person has fallen the Kinect can detect such movements and instantly call an emergency number.
+Using multiple Kinect devices and using KinectFusion \cite{_kinect_fusion} to construct a composite 3D model of the user's entire skeleton from multiple angles could be useful to build a model accurate enough for this kind of application.
+At the moment however, KinectFusion requires lots of processing power and would require increases in speed spread over many low power devices or a single high powered machine in the home. 
 
 In addition, with the release of Kinect 2 there are already multiple improvements that has been built into the device that can improve support of the elderly.
 Currently the Kinect 2 has an IR blaster and the Xbox One already has an implementation of Universal TV Control \cite{_control_tv}.
