@@ -439,39 +439,39 @@ At the moment however, KinectFusion requires lots of processing power and would 
 In addition, with the release of Kinect 2 there are already multiple improvements that has been built into the device that can improve support of the elderly.
 Currently the Kinect 2 has an IR blaster and the Xbox One already has an implementation of Universal TV Control \cite{_control_tv}.
 There are also applications for the Kinect 2 that provide heart rate monitoring \cite{_xbox_fitness}, a feature that could prove useful in irregular heartbeat detection (heart attacks).
-We see this as evidence that the Kinect has a strong role to play in body and health monitoring in the home.
+We see this as evidence that the Kinect has a strong role to play in health monitoring in the home.
 
 At the moment, our Vendos proof of concept for the accessibility of light and appliance movement is still limited to being physically connected to the Arduino itself, creating a possible safety hazard for inattentive users.
 However, with the consumer adaptation of Low-Powered Bluetooth and WiFi Direct, it might be possible to implement house features using those designs.
 Currently a company called Lockitron has already implemented a door locking device that attaches onto any deadbolt, and is controlled through WiFi and Bluetooth by a mobile phone application\cite{_lockitron}.
-Such system provides a working example of adding features to an already working home, proving that it is possible to integrate automation tools into any home.
+Lockitron's system provides a working example of adding features to an existing home, proving that it is possible to augment any home with automation tools.
 With the new release of Arduino Yun, which is an Arduino with wireless interface \cite{_arduino_yun}, it is possible to migrate our current setup of home automation to being wirelessly connected.
 In addition, a wireless interface will still provide modularity in adapting home automation tools as the interaction hardware themselves aren't changed. 
 
-From a usability point of view, we are able to utilize commonly used gestures and provide voice commands that are easy to remember and use.
-However, due to the inaccuracy of the Kinect, there has been mistakes in reading the gestures and voice listening.
-Fortunately, as the camera in the Kinect has a very low resolution, Kinect 2 should fixed these shortcoming as both the microphone and camera have been upgraded and will provide more accurate usability.
-We would also like to build an application for users to program their own voice and gesture commands to do such actions as that will provide elderly with more options on how to define their actions and voice.
+From a usability point of view, Vendos includes commonly used gestures and voice commands that are easy to recall.
+However, due to the inaccuracy of the Kinect, there have been mistakes in gesture detection and voice recognition.
+Fortunately, as the camera in the Kinect has a very low resolution, Kinect 2 should fixed these shortcoming as both the microphone and camera have been upgraded and will provide more accurate results.
+We would also like to build an application for users to program their own voice and gesture commands to do such actions as that will provide elderly with more options to customize Vendos to their needs and limitations.
 
 % =============================================================================
 \section{Conclusion}
 % =============================================================================
 
-We demonstrated how voice controls and gestures obtained from low cost commodity hardware can be successfully integrated into a home automation solution.
-The accuracy of controls is not yet at an acceptable point where such a system could be relied upon solely for taking care of common household tasks.
-Despite the flaws in current voice and gesture recognition systems, our solution has value to the common person and people who are mostly independent.
+We have demonstrated how gestures and voice controls obtained from low cost commodity hardware can be successfully integrated into a home automation solution.
+The accuracy of controls is not yet at an voice point where such a system could be solely relied upon for taking care of potentially dangerous household tasks.
+Despite the flaws in current gesture and gesture recognition systems, our solution has value both to an everyday user and those seeking more independence.
 The lack of physical controls used in our approach has interesting implications on how normal households have formed their workflows.
-In a future where your house may be able to talk back to you and hear all of your commands, we will see the quality of all our lives increase.
+In a future where your house may be able to talk back to you and hear all of your commands, we will see quality of life increases across the board.
 
-However, our solution will need to grow beyond the limitations of current speech recognition abilities and gesture interpretation.
+However, our solution will need to grow beyond the limitations of current gesture interpretation abilities and speech recognition.
 For a system that may be relied upon to save lives, any mistakes could result in lives lost.
 At this stage, Vendos deployed in a real nursing home would probably be too frustrating for caretakers and users alike to deal with.
-Our outlook on this project is still optimistic and the hardware necessary to integrate it into real homes is on track to grow stronger and cheaper.
+However, our outlook on this project is still optimistic and the hardware necessary to integrate it into real homes is on track to grow stronger and cheaper.
 
 \section{Acknowledgements}
 
 We thank our professor, Dr. Nadir Weibel, for organizing CSE 118 - Ubiquitous Computing at the University of California, San Diego and providing materials needed to complete this project.
-We also thank our TA, Eric Seidel, for offering his assistance in discussion with setting up the Kinect for Windows SDK, constructing presentations, and writing this paper.
+We also thank our TA, Eric Seidel, for offering his assistance in discussion section with setting up the Kinect for Windows SDK, constructing presentations, and writing this paper.
 
 \balance
 \bibliographystyle{acm-sigchi}
