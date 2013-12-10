@@ -1,45 +1,70 @@
 This is BibTeX, Version 0.99c (TeX Live 2009/Debian)
 The top-level auxiliary file: research_paper.aux
 The style file: acm-sigchi.bst
-Database file #1: research_paper.bib
-You've used 1 entry,
+Database file #1: references.bib
+Warning--to sort, need author or key in _life
+Warning--to sort, need author or key in _seniors
+Warning--to sort, need author or key in _caregiving
+Warning--to sort, need author or key in _nursing
+Warning--to sort, need author or key in _forbes
+Warning--to sort, need author or key in _cdc
+Warning--to sort, need author or key in _assistive
+Warning--to sort, need author or key in _kinect
+Warning--to sort, need author or key in _writing
+Warning--to sort, need author or key in _sharp_voice
+Warning--to sort, need author or key in _arduino
+Warning--to sort, need author or key in _control
+Warning--to sort, need author or key in _bildr
+Warning--to sort, need author or key in _how_to_tv
+Warning--to sort, need author or key in _how_to_motors
+Warning--to sort, need author or key in _arduino_lights
+Warning--to sort, need author or key in _nitrogen
+Warning--to sort, need author or key in _stepper_motor
+Warning--to sort, need author or key in _arduino_policy
+Warning--to sort, need author or key in _control_tv
+Warning--to sort, need author or key in _xbox_fitness
+Warning--to sort, need author or key in _lockitron
+Warning--to sort, need author or key in _arduino_yun
+Warning--empty journal in _kinect_fusion
+You've used 24 entries,
             2243 wiz_defined-function locations,
-            530 strings with 4003 characters,
-and the built_in function-call counts, 239 in all, are:
-= -- 20
-> -- 7
+            597 strings with 7363 characters,
+and the built_in function-call counts, 3851 in all, are:
+= -- 362
+> -- 30
 < -- 0
-+ -- 3
++ -- 26
 - -- 2
-* -- 11
-:= -- 48
-add.period$ -- 3
-call.type$ -- 1
-change.case$ -- 3
+* -- 123
+:= -- 436
+add.period$ -- 48
+call.type$ -- 24
+change.case$ -- 73
 chr.to.int$ -- 0
-cite$ -- 1
-duplicate$ -- 12
-empty$ -- 23
+cite$ -- 48
+duplicate$ -- 168
+empty$ -- 542
 format.name$ -- 2
-if$ -- 48
+if$ -- 954
 int.to.chr$ -- 0
-int.to.str$ -- 1
-missing$ -- 2
-newline$ -- 8
+int.to.str$ -- 24
+missing$ -- 1
+newline$ -- 99
 num.names$ -- 2
-pop$ -- 7
+pop$ -- 189
 preamble$ -- 1
-purify$ -- 3
+purify$ -- 49
 quote$ -- 0
-skip$ -- 6
+skip$ -- 187
 stack$ -- 0
-substring$ -- 5
-swap$ -- 1
+substring$ -- 120
+swap$ -- 23
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 2
-warning$ -- 0
+type$ -- 96
+warning$ -- 24
 while$ -- 2
-width$ -- 2
-write$ -- 13
+width$ -- 26
+write$ -- 170
+(There were 24 warnings)

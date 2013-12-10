@@ -164,7 +164,7 @@
 \captionsetup{font={small,sf},textfont=sf,justification=raggedright}
 
 % Typeset URLs
-\usepackage[hyphens]{url}
+\usepackage[hyphens[{url}
 % Define a (compact) global style for URLs, rather than the default one
 \def\url@leostyle{\@ifundefined{selectfont}{\def\UrlFont{\sf}}{\def\UrlFont{\small\bf\ttfamily}}}
 \urlstyle{leo}

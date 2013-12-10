@@ -1,8 +1,129 @@
-\begin{thebibliography}{1}
+\begin{thebibliography}{10}
 
-\bibitem{Schwartz95}
-Schwartz, M.
-\newblock {\em Guidelines for Bias-Free Writing}.
-\newblock Indiana University Press, Bloomington, IN, USA, 1995.
+\bibitem{_stepper_motor}
+28byj-48 5v stepper step motor+driver test module board uln2003 5 line 4 phase
+  for arduino - buy 5v stepper step {Motor,Step} motor driver test
+  {Module,Stepper} motor module for arduino product on alibaba.com.
+\newblock
+  \url{http://www.alibaba.com/product-gs/1215359738/28BYJ_48_5V_Stepper_Step_M%
+otor.html}.
+
+\bibitem{_nursing}
+Abstract {\textbar} {CAPABLE} study {\textbar} school of nursing at johns
+  hopkins university.
+\newblock
+  \url{http://nursing.jhu.edu/faculty_research/research/projects/capable/abstr%
+act.html}.
+
+\bibitem{_arduino_yun}
+Arduino - {ArduinoBoardYun}.
+\newblock \url{http://arduino.cc/en/Main/ArduinoBoardYun?from=Main.ArduinoYUN}.
+
+\bibitem{_arduino_policy}
+Arduino - policy.
+\newblock \url{http://arduino.cc/en/Main/Policy}.
+
+\bibitem{_arduino}
+Arduino - {ShiftOut}.
+\newblock \url{http://www.arduino.cc/en/Tutorial/ShiftOut}.
+
+\bibitem{_arduino_lights}
+Arduino controlled light dimmer.
+\newblock
+  \url{http://www.instructables.com/id/Arduino-controlled-light-dimmer-The-cir%
+cuit/}.
+
+\bibitem{_assistive}
+Assistive and self-help devices: Living better with arthritis.
+\newblock
+  \url{http://www.webmd.com/rheumatoid-arthritis/guide/assistive-devices}.
+
+\bibitem{_bildr}
+bildr » high-power control: Arduino + n-channel {MOSFET}.
+\newblock \url{http://bildr.org/2012/03/rfp30n06le-arduino/}.
+
+\bibitem{_caregiving}
+Caregiving goes digital - and lets boomers age in place.
+\newblock
+  \url{http://www.usatoday.com/story/news/nation/2013/11/24/technology-healthc%
+are-boomers/3661007/}.
+
+\bibitem{_cdc}
+{CDC} - chronic disease - arthritis - at a glance 2013.
+\newblock
+  \url{http://www.cdc.gov/chronicdisease/resources/publications/aag/arthritis.%
+htm}.
+
+\bibitem{_control}
+Control appliances from an arduino: The start of home automation.
+\newblock
+  \url{http://www.makeuseof.com/tag/control-appliances-from-an-arduino-the-sta%
+rt-of-home-automation/}.
+
+\bibitem{_control_tv}
+Control {TV} with voice commands on xbox one - xbox.com.
+\newblock
+  \url{http://support.xbox.com/en-US/xbox-one/live-tv/control-tv-with-voice}.
+
+\bibitem{_xbox_fitness}
+Famous trainers partner with xbox on new fitness service, xbox fitness.
+\newblock \url{http://news.xbox.com/2013/09/xbox-one-xbox-fitness-unveiled}.
+
+\bibitem{_forbes}
+How can we keep seniors in their homes as long as possible? - forbes.
+\newblock
+  \url{http://www.forbes.com/sites/nextavenue/2013/09/13/how-can-we-keep-senio%
+rs-in-their-homes-as-long-as-possible/}.
+
+\bibitem{_how_to_tv}
+How to control your {TV} with an arduino!
+\newblock
+  \url{http://www.instructables.com/id/How-to-control-your-TV-with-an-Arduino/%
+}.
+
+\bibitem{_how_to_motors}
+How-to: Motors.
+\newblock \url{http://www.instructables.com/id/How-To-Motors/?ALLSTEPS}.
+
+\bibitem{_kinect}
+Kinect effect reaches into hospitals, senior centers.
+\newblock
+  \url{http://www.microsoft.com/en-us/news/features/2011/dec11/12-19kinecteffe%
+ct.aspx}.
+
+\bibitem{_life}
+Life expectancy at birth by race and sex, 1930–2010 {\textbar}
+  infoplease.com.
+\newblock \url{http://www.infoplease.com/ipa/A0005148.html}.
+
+\bibitem{_lockitron}
+Lockitron.
+\newblock \url{https://lockitron.com/preorder}.
+
+\bibitem{_nitrogen}
+Nitrogen logic - products.
+\newblock \url{http://www.nitrogenlogic.com/products/}.
+
+\bibitem{_seniors}
+Seniors fear loss of independence, nursing homes more than death.
+\newblock
+  \url{http://www.marketingcharts.com/wp/direct/seniors-fear-loss-of-independe%
+nce-nursing-homes-more-than-death-2343/}.
+
+\bibitem{_sharp_voice}
+sharp-voice - google voice library for c\# - google project hosting.
+\newblock \url{https://code.google.com/p/sharp-voice/}.
+
+\bibitem{_writing}
+Writing a gesture service with the kinect for windows {SDK} - {MCS} {UK}
+  solution development team - site home - {MSDN} blogs.
+\newblock
+  \url{http://blogs.msdn.com/b/mcsuksoldev/archive/2011/08/08/writing-a-gestur%
+e-service-with-the-kinect-for-windows-sdk.aspx}.
+
+\bibitem{_kinect_fusion}
+Izadi, S.
+\newblock {KinectFusion:} real-time {3D} reconstruction and interaction using a
+  moving depth camera.
 
 \end{thebibliography}

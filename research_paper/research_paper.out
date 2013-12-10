@@ -1,10 +1,24 @@
-\BOOKMARK [1][-]{section*.6}{Introduction}{}
-\BOOKMARK [1][-]{section*.8}{Copyright}{}
-\BOOKMARK [1][-]{section*.10}{Motivation and Related Work}{}
-\BOOKMARK [2][-]{section*.12}{Language, style, and content}{section*.10}
-\BOOKMARK [1][-]{section*.14}{Solution \(Vendos\)}{}
-\BOOKMARK [1][-]{section*.16}{Evaluation}{}
-\BOOKMARK [1][-]{section*.18}{Discussion}{}
-\BOOKMARK [1][-]{section*.20}{Conclusion}{}
-\BOOKMARK [1][-]{section*.22}{Acknowledgements}{}
-\BOOKMARK [1][-]{section*.23}{References}{}
+\BOOKMARK [1][-]{section*.5}{Introduction}{}
+\BOOKMARK [1][-]{section*.7}{Motivation and Related Work}{}
+\BOOKMARK [1][-]{section*.9}{Vendos \(Software\)}{}
+\BOOKMARK [2][-]{section*.11}{Design Considerations for Gesture and Voice}{section*.9}
+\BOOKMARK [2][-]{section*.13}{Gesture Implementation}{section*.9}
+\BOOKMARK [2][-]{section*.15}{Voice Implementation}{section*.9}
+\BOOKMARK [3][-]{section*.17}{Google Voice Integration}{section*.15}
+\BOOKMARK [3][-]{section*.19}{Television Control}{section*.15}
+\BOOKMARK [3][-]{section*.21}{Light Control}{section*.15}
+\BOOKMARK [3][-]{section*.23}{Appliance Control}{section*.15}
+\BOOKMARK [3][-]{section*.25}{Emergency Calling and Messaging}{section*.15}
+\BOOKMARK [3][-]{section*.27}{Music Playback}{section*.15}
+\BOOKMARK [3][-]{section*.29}{Environment Presets}{section*.15}
+\BOOKMARK [1][-]{section*.31}{Vendos \(Hardware\)}{}
+\BOOKMARK [2][-]{section*.33}{Relay}{section*.31}
+\BOOKMARK [2][-]{section*.35}{Regulator}{section*.31}
+\BOOKMARK [2][-]{section*.37}{Infrared Emitter}{section*.31}
+\BOOKMARK [2][-]{section*.39}{Stepper motor}{section*.31}
+\BOOKMARK [1][-]{section*.41}{Evaluation \(Software\)}{}
+\BOOKMARK [1][-]{section*.43}{Evaluation \(Hardware\)}{}
+\BOOKMARK [1][-]{section*.45}{Discussion}{}
+\BOOKMARK [1][-]{section*.47}{Conclusion}{}
+\BOOKMARK [1][-]{section*.49}{Acknowledgements}{}
+\BOOKMARK [1][-]{section*.50}{References}{}
