@@ -35,4 +35,3 @@ C:\Users\Derek\Documents\GitHub\cse-118-yolo-secret-ninja\Fizbin.Kinect.Gestures
 C:\Users\Derek\Documents\GitHub\cse-118-yolo-secret-ninja\Fizbin.Kinect.Gestures-master\Microsoft.Kinect.Toolkit\obj\Debug\Microsoft.Kinect.Toolkit.csproj.GenerateResource.Cache
 C:\Users\Derek\Documents\GitHub\cse-118-yolo-secret-ninja\Fizbin.Kinect.Gestures-master\Microsoft.Kinect.Toolkit\obj\Debug\Microsoft.Kinect.Toolkit.dll
 C:\Users\Derek\Documents\GitHub\cse-118-yolo-secret-ninja\Fizbin.Kinect.Gestures-master\Microsoft.Kinect.Toolkit\obj\Debug\Microsoft.Kinect.Toolkit.pdb
-C:\Users\Derek\Documents\GitHub\cse-118-yolo-secret-ninja\Fizbin.Kinect.Gestures-master\Microsoft.Kinect.Toolkit\obj\Debug\Microsoft.Kinect.Toolkit.csprojResolveAssemblyReference.cache

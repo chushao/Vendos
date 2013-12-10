@@ -128,9 +128,12 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Help.wav" />
+    <Content Include="partymusic.wav" />
     <Content Include="Pikachu.wav" />
     <Resource Include="SpeechGrammar.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
     </Resource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
