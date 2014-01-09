@@ -1,0 +1,18 @@
+PWD /Users/cshao/Dropbox/CSE 118/cse-118-yolo-secret-ninja/research_paper
+INPUT /usr/local/texlive/2013/texmf.cnf
+INPUT /usr/local/texlive/2013/texmf-dist/web2c/texmf.cnf
+INPUT /usr/local/texlive/2013/texmf-var/web2c/pdftex/pdflatex.fmt
+INPUT research_paper.tex
+OUTPUT research_paper.log
+INPUT chi-ext.cls
+INPUT chi-ext.cls
+INPUT /usr/local/texlive/2013/texmf-dist/tex/latex/base/article.cls
+INPUT /usr/local/texlive/2013/texmf-dist/tex/latex/base/article.cls
+INPUT /usr/local/texlive/2013/texmf-dist/tex/latex/base/size10.clo
+INPUT /usr/local/texlive/2013/texmf-dist/tex/latex/base/size10.clo
+INPUT titlesec.sty
+INPUT titlesec.sty
+INPUT caption.sty
+INPUT caption.sty
+INPUT /usr/local/texlive/2013/texmf-dist/tex/latex/caption/caption3.sty
+INPUT /usr/local/texlive/2013/texmf-dist/tex/latex/caption/caption3.sty

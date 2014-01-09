@@ -1,0 +1,83 @@
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2013.5.30)  11 DEC 2013 05:02
+entering extended mode
+ restricted \write18 enabled.
+ file:line:error style messages enabled.
+ %&-line parsing enabled.
+**sigchi12extabstracts.tex
+(./sigchi12extabstracts.tex
+LaTeX2e <2011/06/27>
+Babel <3.9f> and hyphenation patterns for 78 languages loaded.
+(./chi-ext.cls
+Document Class: chi-ext 2010/12/01, Luis A. Leiva
+CHI Extended Abstracts template, original design by Manas Tungare, modified and
+ refactored by Luis A. Leiva
+Available at http://personales.upv.es/luileito/chiext/
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2007/10/19 v1.4h Standard LaTeX document class
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/size10.clo
+File: size10.clo 2007/10/19 v1.4h Standard LaTeX file (size option)
+)
+\c@part=\count79
+\c@section=\count80
+\c@subsection=\count81
+\c@subsubsection=\count82
+\c@paragraph=\count83
+\c@subparagraph=\count84
+\c@figure=\count85
+\c@table=\count86
+\abovecaptionskip=\skip41
+\belowcaptionskip=\skip42
+\bibindent=\dimen102
+)
+\catcount=\count87
+ (./titlesec.sty
+Package: titlesec 2007/08/12 v2.8 Sectioning titles
+\ttl@box=\box26
+\beforetitleunit=\skip43
+\aftertitleunit=\skip44
+\ttl@plus=\dimen103
+\ttl@minus=\dimen104
+\ttl@toksa=\toks14
+\titlewidth=\dimen105
+\titlewidthlast=\dimen106
+\titlewidthfirst=\dimen107
+) (./caption.sty
+Package: caption 2009/10/09 v3.1k Customizing captions (AR)
+
+(/usr/local/texlive/2013/texmf-dist/tex/latex/caption/caption3.sty
+Package: caption3 2013/05/02 v1.6-88 caption3 kernel (AR)
+Package caption3 Info: TeX engine: e-TeX on input line 57.
+
+
+/usr/local/texlive/2013/texmf-dist/tex/latex/caption/caption3.sty:199: LaTeX Er
+ror: Command \caption@Info already defined.
+               Or name \end... illegal, see p.192 of the manual.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.199   \PackageInfo{caption}{#1}}
+                                  
+? 
+/usr/local/texlive/2013/texmf-dist/tex/latex/caption/caption3.sty:199: Emergenc
+y stop.
+ ...                                              
+                                                  
+l.199   \PackageInfo{caption}{#1}}
+                                  
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+ 
+Here is how much of TeX's memory you used:
+ 517 strings out of 493315
+ 6580 string characters out of 6137904
+ 59422 words of memory out of 5000000
+ 4047 multiletter control sequences out of 15000+600000
+ 3640 words of font info for 14 fonts, out of 8000000 for 9000
+ 957 hyphenation exceptions out of 8191
+ 28i,0n,22p,258b,36s stack positions out of 5000i,500n,10000p,200000b,80000s
+/usr/local/texlive/2013/texmf-dist/tex/latex/caption/caption3.sty:199:  ==> Fat
+al error occurred, no output PDF file produced!
